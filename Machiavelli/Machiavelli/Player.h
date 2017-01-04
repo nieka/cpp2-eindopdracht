@@ -15,12 +15,22 @@ class Player {
 public:
     Player() {}
     Player(const std::string& name) : name {name} {}
+	~Player();
 
-    std::string get_name() const { return name; }
-    void set_name(const std::string& new_name) { name = new_name; }
+	//getter and setters
+	std::string get_name() const;
+	void set_name(const std::string& new_name);
+
+	int getAge() const;
+	void set_age(int new_age);
+
+	int getGoudstukken() const;
+	void addGoudStukken(int extre_goudstukken);
 
 private:
     std::string name;
+	int age; 
+	int goudstukken;
 };
 
 #endif /* Player_hpp */

@@ -13,39 +13,126 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\cards">
+      <UniqueIdentifier>{769d70e2-b375-4660-9250-e6ff435a7a5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cards">
+      <UniqueIdentifier>{e493e72d-3bac-4db0-9675-efd9bde307de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Karakters">
+      <UniqueIdentifier>{4b8b5b92-2749-42c0-ae0f-47f91c789949}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\karakters">
+      <UniqueIdentifier>{6ed094af-c098-4f66-8f18-01dd6e31d712}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\server">
+      <UniqueIdentifier>{03e17379-11c5-4600-ab49-f1e7cc61f5f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\server">
+      <UniqueIdentifier>{ffb661a5-543c-400f-87b6-ecd541347b46}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ClientCommand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientInfo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Socket.h">
+    <ClInclude Include="Card.h">
+      <Filter>Header Files\cards</Filter>
+    </ClInclude>
+    <ClInclude Include="Deck.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Sync_queue.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="IKarakter.h">
+      <Filter>Header Files\Karakters</Filter>
+    </ClInclude>
+    <ClInclude Include="Bouwmeester.h">
+      <Filter>Header Files\Karakters</Filter>
+    </ClInclude>
+    <ClInclude Include="Dief.h">
+      <Filter>Header Files\Karakters</Filter>
+    </ClInclude>
+    <ClInclude Include="Koning.h">
+      <Filter>Header Files\Karakters</Filter>
+    </ClInclude>
+    <ClInclude Include="Koopman.h">
+      <Filter>Header Files\Karakters</Filter>
+    </ClInclude>
+    <ClInclude Include="Magier.h">
+      <Filter>Header Files\Karakters</Filter>
+    </ClInclude>
+    <ClInclude Include="Moordenaar.h">
+      <Filter>Header Files\Karakters</Filter>
+    </ClInclude>
+    <ClInclude Include="Prediker.h">
+      <Filter>Header Files\Karakters</Filter>
     </ClInclude>
     <ClInclude Include="throw.h">
+      <Filter>Header Files\server</Filter>
+    </ClInclude>
+    <ClInclude Include="Sync_queue.h">
+      <Filter>Header Files\server</Filter>
+    </ClInclude>
+    <ClInclude Include="Socket.h">
+      <Filter>Header Files\server</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientCommand.h">
+      <Filter>Header Files\server</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientInfo.h">
+      <Filter>Header Files\server</Filter>
+    </ClInclude>
+    <ClInclude Include="Condotierre.h">
+      <Filter>Header Files\Karakters</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Socket.cpp">
+    <ClCompile Include="Controller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="throw.cpp">
+    <ClCompile Include="Deck.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Card.cpp">
+      <Filter>Source Files\cards</Filter>
+    </ClCompile>
+    <ClCompile Include="Bouwmeester.cpp">
+      <Filter>Source Files\karakters</Filter>
+    </ClCompile>
+    <ClCompile Include="Condotierre.cpp">
+      <Filter>Source Files\karakters</Filter>
+    </ClCompile>
+    <ClCompile Include="Dief.cpp">
+      <Filter>Source Files\karakters</Filter>
+    </ClCompile>
+    <ClCompile Include="Koopman.cpp">
+      <Filter>Source Files\karakters</Filter>
+    </ClCompile>
+    <ClCompile Include="Koning.cpp">
+      <Filter>Source Files\karakters</Filter>
+    </ClCompile>
+    <ClCompile Include="Magier.cpp">
+      <Filter>Source Files\karakters</Filter>
+    </ClCompile>
+    <ClCompile Include="Moordenaar.cpp">
+      <Filter>Source Files\karakters</Filter>
+    </ClCompile>
+    <ClCompile Include="Prediker.cpp">
+      <Filter>Source Files\karakters</Filter>
+    </ClCompile>
+    <ClCompile Include="throw.cpp">
+      <Filter>Source Files\server</Filter>
+    </ClCompile>
+    <ClCompile Include="Socket.cpp">
+      <Filter>Source Files\server</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files\server</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

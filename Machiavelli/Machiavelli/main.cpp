@@ -19,6 +19,7 @@ using namespace std;
 #include "ClientCommand.h"
 #include "Player.h"
 #include "ClientInfo.h"
+#include "Controller.h"
 
 namespace machiavelli {
     const int tcp_port {1080};
@@ -30,15 +31,15 @@ static Sync_queue<ClientCommand> queue;
 void consume_command() // runs in its own thread
 {
     try {
+		Controller controller;
         while (true) {
             ClientCommand command {queue.get()}; // will block here unless there are still command objects in the queue
             if (auto clientInfo = command.get_client_info().lock()) {
                 auto &client = clientInfo->get_socket();
                 auto &player = clientInfo->get_player();
                 try {
-                    // TODO handle command here
-                    client << player.get_name() << ", you wrote: '" << command.get_cmd() << "', but I'll ignore that for now.\r\n" << machiavelli::prompt;
-                } catch (const exception& ex) {
+					controller.handleCommand(command);
+				} catch (const exception& ex) {
                     cerr << "*** exception in consumer thread for player " << player.get_name() << ": " << ex.what() << '\n';
                     if (client.is_open()) {
                         client.write("Sorry, something went wrong during handling of your request.\r\n");
