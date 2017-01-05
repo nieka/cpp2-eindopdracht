@@ -20,6 +20,7 @@ using namespace std;
 #include "Player.h"
 #include "ClientInfo.h"
 #include "Controller.h"
+#include "VLD.h"
 
 namespace machiavelli {
     const int tcp_port {1080};
