@@ -63,7 +63,10 @@ std::shared_ptr<ClientInfo> init_client_session(Socket client) {
     client.write("What's your name?\r\n");
     client.write(machiavelli::prompt);
     string name {client.readline()};
-    return make_shared<ClientInfo>(move(client), Player { name });
+	client.write("What's your age?\r\n");
+	client.write(machiavelli::prompt);
+	int age = std::stoi(client.readline());
+	return make_shared<ClientInfo>(move(client), Player { name, age });
 }
 
 void handle_client(Socket client) // this function runs in a separate thread

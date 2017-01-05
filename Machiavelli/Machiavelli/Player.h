@@ -14,7 +14,7 @@
 class Player {
 public:
     Player() {}
-    Player(const std::string& name) : name {name} {}
+	Player(const std::string& name, int age) : name{ name }, age{ age } {}
 	~Player();
 
 	//getter and setters
