@@ -10,6 +10,9 @@
 #define Player_hpp
 
 #include <string>
+#include <vector>
+#include <memory>
+#include "Card.h"
 
 class Player {
 public:
@@ -27,10 +30,13 @@ public:
 	int getGoudstukken() const;
 	void addGoudStukken(int extre_goudstukken);
 
+	void drawCard();
+	void showHand();
 private:
     std::string name;
 	int age; 
 	int goudstukken;
+	std::vector<std::shared_ptr<Card>> _hand;
 };
 
 #endif /* Player_hpp */

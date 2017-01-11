@@ -42,3 +42,11 @@ void Player::addGoudStukken(int extre_goudstukken)
 {
 	goudstukken += extre_goudstukken;
 }
+
+void Player::drawCard()
+{
+}
+
+void Player::showHand()
+{
+}

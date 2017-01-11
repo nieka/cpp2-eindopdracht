@@ -2,7 +2,7 @@
 
 Controller::Controller()
 {
-	//todo fill deck
+	deck.fillDeck();
 }
 
 
