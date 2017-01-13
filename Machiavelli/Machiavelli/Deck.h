@@ -1,16 +1,12 @@
 #pragma once
-//kan queue en memory niet gebruiken, hebben conflicten met de std queue's in de main
-//#include <queue>
-//#include <memory>
 #include <vector>
 #include <sstream>
 #include <fstream>
 #include <istream>
-#include <Iostream>
+#include <iostream>
 #include <string>
 #include <algorithm>
 #include "Card.h"
-
 
 class Deck
 {
