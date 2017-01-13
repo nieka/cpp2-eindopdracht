@@ -25,4 +25,6 @@ void Controller::createDeck(std::string filepath)
 		file >> deck;
 	}
 	file.close();
+
+	deck.shuffleDeck();
 }
