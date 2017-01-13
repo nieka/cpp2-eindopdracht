@@ -8,12 +8,13 @@ Deck::Deck()
 Deck::~Deck()
 {
 }
-/*
-void Deck::addCard(std::unique_ptr<Card> c)
+
+void Deck::addCard(Card card)
 {
-	_deck.push(std::move(c));
+	cardCollection.push_back(card);
 }
 
+/*
 std::unique_ptr<Card> Deck::drawCard()
 {
 	std::unique_ptr<Card> card = std::move(_deck.front());
@@ -22,21 +23,47 @@ std::unique_ptr<Card> Deck::drawCard()
 	return std::move(card);
 }
 */
-void Deck::fillDeck()
+
+
+//replace char a for char b in string s
+std::string  Deck::replaceChar(std::string s, char a, char b)
 {
-	//test vector
-	std::vector<Card> cards;
-
-	std::ifstream file("Bouwkaarten.csv");
-	std::string value;
-
-	while (file.good())
-	{
-		std::getline(file, value, ',');
-		//std::cout << value << std::endl;
-
-
-		//TODO: parser om de data van de kaarten te scheiden.
-	}
+	std::replace(s.begin(), s.end(), a, b);
+	return s;
 }
+
+//split the string into pieces and put them in a vector
+std::vector<std::string> Deck::splitString(std::string s, char delimiter)
+{
+	std::vector<std::string> internal;
+	std::stringstream ss(s); // Turn the string into a stream.
+	std::string tok;
+
+	while (getline(ss, tok, delimiter)) {
+		internal.push_back(tok);
+	}
+
+	return internal;
+}
+
+//stream operator, reads file, used to create the cards, and place them in the cardcollection vector
+std::ifstream& operator >> (std::ifstream& is, Deck& deck)
+{
+	std::string output;
+
+	is >> output;
+
+	if (output.size() > 0)
+	{
+		output = deck.replaceChar(output, '_', ' ');
+		std::vector<std::string> stringparts = deck.splitString(output, ';');
+
+		Card card(stringparts[0], stringparts[2], std::stoi(stringparts[1]));
+		deck.addCard(card);
+	}
+
+	return is;
+}
+
+
 

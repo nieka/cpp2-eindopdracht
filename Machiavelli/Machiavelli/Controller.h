@@ -1,6 +1,12 @@
 #pragma once
+#include <fstream>
+#include <istream>
+#include <Iostream>
+#include <string>
 #include "ClientCommand.h"
 #include "Deck.h"
+#include "Card.h"
+#include <string>
 
 class Controller
 {
@@ -12,5 +18,6 @@ public:
 	
 private:
 	Deck deck;
+	void createDeck(std::string filepath);
 };
 

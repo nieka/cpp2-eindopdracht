@@ -2,7 +2,7 @@
 
 Controller::Controller()
 {
-	deck.fillDeck();
+	createDeck("Bouwkaarten.csv");
 }
 
 
@@ -14,4 +14,15 @@ void Controller::handleCommand(ClientCommand command)
 {
 	//todo handle commands
 
+}
+
+void Controller::createDeck(std::string filepath)
+{
+	std::ifstream file(filepath);
+
+	while (file.good())
+	{
+		file >> deck;
+	}
+	file.close();
 }

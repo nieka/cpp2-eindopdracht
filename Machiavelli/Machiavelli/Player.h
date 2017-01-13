@@ -9,6 +9,7 @@
 #ifndef Player_hpp
 #define Player_hpp
 
+#pragma once
 #include <string>
 #include <vector>
 #include <memory>
