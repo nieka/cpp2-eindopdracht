@@ -14,16 +14,13 @@ void Deck::addCard(Card card)
 	cardCollection.push_back(card);
 }
 
-/*
-std::unique_ptr<Card> Deck::drawCard()
+Card Deck::drawCard()
 {
-	std::unique_ptr<Card> card = std::move(_deck.front());
-	_deck.pop();
+	Card c = _deck.back();
+	_deck.pop_back();
 
-	return std::move(card);
+	return c;
 }
-*/
-
 
 //replace char a for char b in string s
 std::string  Deck::replaceChar(std::string s, char a, char b)
@@ -44,6 +41,23 @@ std::vector<std::string> Deck::splitString(std::string s, char delimiter)
 	}
 
 	return internal;
+}
+
+void Deck::shuffleDeck()
+{
+	std::vector<Card> newDeck;
+
+	srand(time(NULL));
+	while (cardCollection.size() > 0)
+	{
+		int id = rand() % cardCollection.size();
+		//std::cout << std::to_string(id) << std::endl;
+
+		newDeck.push_back(cardCollection[id]);
+		cardCollection.erase(cardCollection.begin() + id);
+	}
+
+	_deck = newDeck;
 }
 
 //stream operator, reads file, used to create the cards, and place them in the cardcollection vector
