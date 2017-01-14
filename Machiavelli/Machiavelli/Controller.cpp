@@ -5,7 +5,8 @@
 
 Controller::Controller()
 {
-	createDeck("Bouwkaarten.csv");
+	createCardDeck();
+
 }
 
 
@@ -28,23 +29,37 @@ void Controller::handleCommand(ClientCommand command)
 			}
 		}
 		else {
-			_gameController.HandleGameCommands(command,*this);
-		}		
+			_gameController.HandleGameCommands(command, *this);
+		}
 	}
 }
 
-void Controller::createDeck(std::string filepath)
+void Controller::createCardDeck()
 {
-	std::ifstream file(filepath);
-
+	std::ifstream file(_cardPath);
 	while (file.good())
 	{
-		file >> deck;
+		file >> _cardDeck;
 	}
 
 	file.close();
 
-	deck.shuffleDeck();
+	_cardDeck.shuffleDeck();
+}
+
+void Controller::createKarakterDeck()
+{
+	/*
+	std::ifstream file(_karakterPath);
+	while (file.good())
+	{
+		file >> _karakterDeck;
+	}
+
+	file.close();
+
+	_karakterDeck.shuffleDeck();
+	*/
 }
 
 void Controller::printLine(const std::string value)

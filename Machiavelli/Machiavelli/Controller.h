@@ -10,6 +10,8 @@
 #include "Player.h"
 #include "Socket.h"
 #include "GameController.h"
+//#include "IKarakter.h"
+//#include "DeckBuilder.h"
 
 class Controller
 {
@@ -19,18 +21,20 @@ public:
 
 	void handleCommand(ClientCommand command);
 	void printLine(const std::string value);
-
+	void createCardDeck();
+	void createKarakterDeck();
 	std::vector<Player> getPlayers();
 	
 private:
-	Deck<Card> deck;
-	void createDeck(std::string filepath);
-	
 	bool started = false;
 
 	//variable
+	Deck<Card> _cardDeck;
+	//Deck<IKarakter> _karakterDeck;
 	std::vector<Player> players;
 	std::vector<Socket> playerSockets;
 	GameController _gameController;
+	std::string _cardPath = "Bouwkaarten.csv";
+	std::string _karakterPath = "karakterkaarten.csv";
 };
 
