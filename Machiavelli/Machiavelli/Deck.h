@@ -13,19 +13,19 @@
 #include <time.h>
 #include "Card.h"
 
-class Deck
-{
+template <class T>
+class Deck {
 public:
 	Deck();
 	~Deck();
-	void addCard(Card card);
-	Card drawCard();	
-	friend std::ifstream& operator >> (std::ifstream& is, Deck& deck);
+	void addCard(T& t);
+	//T& drawCard();	
 	void shuffleDeck();
+
+	friend std::ifstream& operator >> (std::ifstream&, const Deck<T>&);
 private:
 	std::string  replaceChar(std::string s, char a, char b);
 	std::vector<std::string> splitString(std::string s, char delimiter);
-	std::vector<Card> cardCollection;
-	std::vector<Card> _deck;
+	std::vector<T> cardCollection;
+	std::vector<T> _deck;
 };
-

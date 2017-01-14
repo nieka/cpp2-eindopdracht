@@ -1,49 +1,56 @@
 #include "Deck.h"
 
-Deck::Deck()
+template <class T>
+Deck<T>::Deck()
 {
 }
 
-
-Deck::~Deck()
+template <class T>
+Deck<T>::~Deck()
 {
 }
 
-void Deck::addCard(Card card)
+template <class T>
+void Deck<T>::addCard(T & t)
 {
-	cardCollection.push_back(card);
+	cardCollection.push_back(t);
 }
-
-Card Deck::drawCard()
+/*
+template <class T>
+T Deck<T>::drawCard()
 {
-	Card c = _deck.back();
+	T c = _deck.back();
 	_deck.pop_back();
 
 	return c;
 }
+*/
 
 //replace char a for char b in string s
-std::string  Deck::replaceChar(std::string s, char a, char b)
+template <class T>
+std::string  Deck<T>::replaceChar(std::string s, char a, char b)
 {
 	std::replace(s.begin(), s.end(), a, b);
 	return s;
 }
 
 //split the string into pieces and put them in a vector
-std::vector<std::string> Deck::splitString(std::string s, char delimiter)
+template <class T>
+std::vector<std::string> Deck<T>::splitString(std::string s, char delimiter)
 {
-	std::vector<std::string> internal;
+	std::vector<std::string> i;
 	std::stringstream ss(s); // Turn the string into a stream.
 	std::string tok;
 
 	while (getline(ss, tok, delimiter)) {
-		internal.push_back(tok);
+		i.push_back(tok);
 	}
 
-	return internal;
+	return i;
 }
 
-void Deck::shuffleDeck()
+template <class T>
+void Deck<T>::shuffleDeck()
 {
 	std::vector<Card> newDeck;
 
@@ -61,7 +68,8 @@ void Deck::shuffleDeck()
 }
 
 //stream operator, reads file, used to create the cards, and place them in the cardcollection vector
-std::ifstream& operator >> (std::ifstream& is, Deck& deck)
+template <class T>
+std::ifstream& operator >> (std::ifstream& is, const Deck<T>& deck)
 {
 	std::string output;
 
@@ -78,6 +86,3 @@ std::ifstream& operator >> (std::ifstream& is, Deck& deck)
 
 	return is;
 }
-
-
-

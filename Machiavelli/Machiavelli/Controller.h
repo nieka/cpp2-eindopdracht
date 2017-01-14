@@ -17,7 +17,7 @@ public:
 	void handleCommand(ClientCommand command);
 	
 private:
-	Deck deck;
+	Deck<Card> deck;
 	void createDeck(std::string filepath);
 };
 
