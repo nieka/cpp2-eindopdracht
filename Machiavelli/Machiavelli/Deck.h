@@ -1,7 +1,4 @@
 #pragma once
-//kan queue en memory niet gebruiken, hebben conflicten met de std queue's in de main
-
-//#include <memory>
 #include <vector>
 #include <sstream>
 #include <fstream>

@@ -35,12 +35,27 @@ void Player::set_age(int new_age)
 
 int Player::getGoudstukken() const
 {
-	return goudstukken;
+	return _goudstukken;
 }
 
 void Player::addGoudStukken(int extre_goudstukken)
 {
-	goudstukken += extre_goudstukken;
+	_goudstukken += extre_goudstukken;
+}
+
+void Player::setGoudStukkken(int goudstukken)
+{
+	_goudstukken = goudstukken;
+}
+
+void Player::setKoning(const bool koning)
+{
+	_koning = koning;
+}
+
+const bool Player::isKoning()
+{
+	return _koning;
 }
 
 void Player::drawCard()

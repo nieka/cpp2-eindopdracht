@@ -7,6 +7,9 @@
 #include "Deck.h"
 #include "Card.h"
 #include <string>
+#include "Player.h"
+#include "Socket.h"
+#include "GameController.h"
 
 class Controller
 {
@@ -15,9 +18,19 @@ public:
 	~Controller();
 
 	void handleCommand(ClientCommand command);
+	void printLine(const std::string value);
+
+	std::vector<Player> getPlayers();
 	
 private:
 	Deck<Card> deck;
 	void createDeck(std::string filepath);
+	
+	bool started = false;
+
+	//variable
+	std::vector<Player> players;
+	std::vector<Socket> playerSockets;
+	GameController _gameController;
 };
 
