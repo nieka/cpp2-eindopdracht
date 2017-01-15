@@ -1,12 +1,12 @@
 #pragma once
 #include "IKarakter.h"
 
-class Dief :
+class Condottiere :
 	public IKarakter
 {
 public:
-	Dief();
-	~Dief();
+	Condottiere();
+	~Condottiere();
 
 	void play(Controller controller);
 };

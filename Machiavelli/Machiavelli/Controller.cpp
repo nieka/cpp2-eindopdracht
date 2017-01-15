@@ -56,8 +56,6 @@ void Controller::createKarakterDeck()
 
 	file.close();
 	_karakterDeck.CreateIKarakterDeck();
-	//_karakterDeck.shuffleDeck();
-	
 }
 
 

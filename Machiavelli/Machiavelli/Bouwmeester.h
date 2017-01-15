@@ -1,6 +1,5 @@
 #pragma once
 #include "IKarakter.h"
-#include "Controller.h"
 
 class Bouwmeester :
 public IKarakter
