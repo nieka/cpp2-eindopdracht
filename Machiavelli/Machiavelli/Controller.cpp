@@ -5,8 +5,8 @@
 
 Controller::Controller()
 {
-	//createCardDeck();
-	createKarakterDeck();
+	createCardDeck();
+	//createKarakterDeck();
 }
 
 
@@ -44,7 +44,6 @@ void Controller::createCardDeck()
 
 	file.close();
 	_cardDeck.CreateCardDeck();
-	_cardDeck.shuffleDeck();
 }
 
 void Controller::createKarakterDeck()

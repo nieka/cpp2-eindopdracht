@@ -9,7 +9,6 @@
 #include <stdlib.h>     
 #include <time.h>
 #include "Card.h"
-#include "IKarakter.h"
 
 template <typename T>
 class Deck {
@@ -42,7 +41,7 @@ public:
 		srand(time(NULL));
 		while (cardCollection.size() > 0)
 		{
-			int id = rand() % cardCollection.size();
+			
 			newDeck.push_back(cardCollection[id]);
 			cardCollection.erase(cardCollection.begin() + id);
 		}
@@ -52,14 +51,19 @@ public:
 
 	void Deck<T>::CreateCardDeck()
 	{
-		for (std::string output : _filestrings)
+		srand(time(NULL));
+		while (_filestrings.size() > 0)
 		{
-			
+			int id = rand() % _filestrings.size();
+			std::string output = _filestrings[id];
+
 			output = replaceChar(output, '_', ' ');
 			std::vector<std::string> stringparts = splitString(output, ';');
 
-			Card card(stringparts[0], stringparts[2], std::stoi(stringparts[1]));
-			addCard(card);
+			std::unique_ptr<Card> card{ new Card(stringparts[0], stringparts[2], std::stoi(stringparts[1])) };
+			_deck.push_back(std::move(card));
+
+			_filestrings.erase(_filestrings.begin() + id);
 		}
 	}
 
@@ -69,7 +73,16 @@ public:
 		{
 			std::vector<std::string> stringparts = splitString(output, ';');
 			
-			//int id = std::stoi(stringparts[0]);
+			int id = std::stoi(stringparts[0]);
+
+			if (id == 1)
+			{
+
+				//std::unique_ptr<IKarakter> b;
+				//Bouwmeester a;
+
+
+			}
 		}
 	}
 
