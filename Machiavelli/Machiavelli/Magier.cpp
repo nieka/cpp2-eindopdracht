@@ -1,5 +1,5 @@
 #include "Magier.h"
-
+#include "Controller.h"
 
 
 Magier::Magier()

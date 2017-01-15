@@ -11,6 +11,15 @@
 #include <time.h>
 #include "IKarakter.h"
 #include "Card.h"
+#include "Moordenaar.h"
+#include "Prediker.h"
+#include "Magier.h"
+#include "Koopman.h"
+#include "Dief.h"
+#include "Koning.h"
+#include "Condottiere.h"
+#include "Bouwmeester.h"
+
 
 template <typename T>
 class Deck {
@@ -67,36 +76,35 @@ public:
 			//parse string / get id for karakter card
 			std::vector<std::string> stringparts = splitString(output, ';');			
 			int karakterid = std::stoi(stringparts[0]);
-			/*
+			
 			//we use the id of the karakter instead of the name, because you cant use a string for a switch.
 			switch (karakterid)
 			{
-			case(1): std::unique_ptr<IKarakter> m { new Moordenaar };
-					 _deck.push_back(std::move(m));
+			case 1: {std::unique_ptr<IKarakter> m{ new Moordenaar };
+					_deck.push_back(std::move(m)); }
 					 break;
-			case(2): std::unique_ptr<IKarakter> d { new Dief };
-					 _deck.push_back(std::move(d));
+			case 2: {std::unique_ptr<IKarakter> d{ new Dief };
+					_deck.push_back(std::move(d)); }
 					 break;
-			case(3): std::unique_ptr<IKarakter> a { new Magier };
-					 _deck.push_back(std::move(a));
+			case(3) : {std::unique_ptr<IKarakter> a{ new Magier };
+					  _deck.push_back(std::move(a)); }
 					 break;
-			case(4): std::unique_ptr<IKarakter> k { new Koning };
-					 _deck.push_back(std::move(k));
+			case(4) : {std::unique_ptr<IKarakter> k{ new Koning };
+					  _deck.push_back(std::move(k)); }
 					 break;
-			case(5): std::unique_ptr<IKarakter> p { new Prediker };
-					 _deck.push_back(std::move(p));
+			case(5) : {std::unique_ptr<IKarakter> p{ new Prediker };
+					  _deck.push_back(std::move(p)); }
 					 break;
-			case(6): std::unique_ptr<IKarakter> o { new Koopman };
-					 _deck.push_back(std::move(o));
+			case(6) : {std::unique_ptr<IKarakter> o{ new Koopman };
+					  _deck.push_back(std::move(o)); }
 					 break;
-			case(7): std::unique_ptr<IKarakter> b { new Bouwmeester };
-					 _deck.push_back(std::move(b));
+			case(7) : {std::unique_ptr<IKarakter> b{ new Bouwmeester };
+					  _deck.push_back(std::move(b)); }
 					 break;
-			case(8): std::unique_ptr<IKarakter> c { new Condottiere };
-					 _deck.push_back(std::move(c));
+			case(8) : {std::unique_ptr<IKarakter> c{ new Condottiere };
+					  _deck.push_back(std::move(c)); }
 					 break;
 			}
-			*/
 			
 			//remove used string from output vector
 			_filestrings.erase(_filestrings.begin() + id);

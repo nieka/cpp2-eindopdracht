@@ -6,7 +6,7 @@
 Controller::Controller()
 {
 	createCardDeck();
-	//createKarakterDeck();
+	createKarakterDeck();
 }
 
 

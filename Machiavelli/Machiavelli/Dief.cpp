@@ -1,6 +1,5 @@
 #include "Dief.h"
-
-
+#include "Controller.h"
 
 Dief::Dief()
 {

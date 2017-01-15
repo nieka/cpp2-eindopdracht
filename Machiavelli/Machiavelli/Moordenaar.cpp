@@ -1,5 +1,5 @@
 #include "Moordenaar.h"
-
+#include "Controller.h"
 
 
 Moordenaar::Moordenaar()

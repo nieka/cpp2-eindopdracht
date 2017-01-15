@@ -1,6 +1,5 @@
 #include "Koning.h"
-
-
+#include "Controller.h"
 
 Koning::Koning()
 {
