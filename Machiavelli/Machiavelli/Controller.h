@@ -5,15 +5,11 @@
 #include <Iostream>
 #include <string>
 #include "ClientCommand.h"
-#include "Deck.h"
-#include "Card.h"
 #include <string>
 #include "Player.h"
 #include "Socket.h"
 #include "GameController.h"
-#include "IKarakter.h"
-
-class IKarakter;
+#include <map>
 
 class Controller
 {
@@ -22,25 +18,20 @@ public:
 	~Controller();
 
 	void handleCommand(ClientCommand command);
-	void printLine(const std::string value);
-	void createCardDeck();
-	void createKarakterDeck();
-	std::vector<Player> getPlayers();
-	
+	void printLine(const std::string value) const;
+	void printToPlayer(const std::string value, const std::string playerName) const;
+	void readLineOfPlayer(const std::string playerName) const;
+	std::vector<Player> getPlayers() const;
 private:
 	bool started = false;
-
-	//variable
-	//Deck<Card> _cardDeck;
-	//Deck<IKarakter> _karakterDeck;
 
 	//pointers required for inheritance of the karakter cards
 	Deck<std::unique_ptr<Card>> _cardDeck;
 	Deck<std::unique_ptr<IKarakter>> _karakterDeck;
 	std::vector<Player> players;
-	std::vector<Socket> playerSockets;
+	std::map<std::string,Socket> playerSockets;
 	GameController _gameController;
-	std::string _cardPath = "Bouwkaarten.csv";
-	std::string _karakterPath = "karakterkaarten.csv";
+	const std::string _cardPath = "Bouwkaarten.csv";
+	const std::string _karakterPath = "karakterkaarten.csv";
 };
 

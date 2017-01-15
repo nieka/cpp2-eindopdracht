@@ -3,6 +3,7 @@
 
 Bouwmeester::Bouwmeester()
 {
+	_name = "Bouwmeester";
 }
 
 

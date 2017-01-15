@@ -31,6 +31,12 @@
     <Filter Include="Source Files\server">
       <UniqueIdentifier>{ffb661a5-543c-400f-87b6-ecd541347b46}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Controllers">
+      <UniqueIdentifier>{2ee03ed4-6ef0-4eb9-9118-cd9b6b66e6a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\controllers">
+      <UniqueIdentifier>{233ab7c1-82bd-47ea-bdbf-fd7a02f93fb3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -63,12 +69,6 @@
     <ClInclude Include="ClientInfo.h">
       <Filter>Header Files\server</Filter>
     </ClInclude>
-    <ClInclude Include="Controller.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameController.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Dief.h">
       <Filter>Header Files\Karakters</Filter>
     </ClInclude>
@@ -90,12 +90,21 @@
     <ClInclude Include="Condottiere.h">
       <Filter>Header Files\Karakters</Filter>
     </ClInclude>
+    <ClInclude Include="GameController.h">
+      <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller.h">
+      <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="KarakterVedelingController.h">
+      <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStates.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Controller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Card.cpp">
@@ -112,9 +121,6 @@
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files\server</Filter>
-    </ClCompile>
-    <ClCompile Include="GameController.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Dief.cpp">
       <Filter>Source Files\karakters</Filter>
@@ -136,6 +142,15 @@
     </ClCompile>
     <ClCompile Include="Condottiere.cpp">
       <Filter>Source Files\karakters</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>Source Files\controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="GameController.cpp">
+      <Filter>Source Files\controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="KarakterVedelingController.cpp">
+      <Filter>Source Files\controllers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

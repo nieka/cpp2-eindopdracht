@@ -3,6 +3,7 @@
 
 Dief::Dief()
 {
+	_name = "Dief";
 }
 
 

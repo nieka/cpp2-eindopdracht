@@ -4,6 +4,7 @@
 
 Condottiere::Condottiere()
 {
+	_name = "Condottiere";
 }
 
 

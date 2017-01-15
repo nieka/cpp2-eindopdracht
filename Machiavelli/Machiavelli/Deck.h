@@ -34,10 +34,14 @@ public:
 
 	T Deck<T>::drawCard()
 	{
-		T c = _deck.back();
+		T c = std::move(_deck.back());
 		_deck.pop_back();
 
 		return c;
+	}
+
+	std::vector<T> getDeck() {
+		return _deck;
 	}
 
 	void Deck<T>::CreateCardDeck()
@@ -112,7 +116,6 @@ public:
 	}
 
 private:
-	std::vector<T> cardCollection;
 	std::vector<T> _deck;
 	std::vector<std::string> _filestrings;
 

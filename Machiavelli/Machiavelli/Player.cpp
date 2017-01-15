@@ -65,3 +65,13 @@ void Player::drawCard()
 void Player::showHand()
 {
 }
+
+void Player::AddBouwCard(std::shared_ptr<Card> card)
+{
+	_bouwKaarten.push_back(card);
+}
+
+void Player::AddKarakterKaart(std::shared_ptr<IKarakter> card)
+{
+	_karakterKaarten.push_back(card);
+}

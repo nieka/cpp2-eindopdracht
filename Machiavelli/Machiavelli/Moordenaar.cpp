@@ -4,6 +4,7 @@
 
 Moordenaar::Moordenaar()
 {
+	_name = "Moordenaar";
 }
 
 

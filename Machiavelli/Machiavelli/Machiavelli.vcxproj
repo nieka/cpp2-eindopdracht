@@ -151,7 +151,9 @@
     <ClInclude Include="Card.h" />
     <ClInclude Include="Dief.h" />
     <ClInclude Include="GameController.h" />
+    <ClInclude Include="GameStates.h" />
     <ClInclude Include="IKarakter.h" />
+    <ClInclude Include="KarakterVedelingController.h" />
     <ClInclude Include="Koning.h" />
     <ClInclude Include="Koopman.h" />
     <ClInclude Include="Magier.h" />
@@ -169,6 +171,7 @@
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Dief.cpp" />
     <ClCompile Include="GameController.cpp" />
+    <ClCompile Include="KarakterVedelingController.cpp" />
     <ClCompile Include="Koning.cpp" />
     <ClCompile Include="Koopman.cpp" />
     <ClCompile Include="Magier.cpp" />

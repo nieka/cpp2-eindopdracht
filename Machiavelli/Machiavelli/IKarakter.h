@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 class Controller;
 
 class IKarakter
@@ -13,6 +14,7 @@ public:
 	{
 		return _Killed;
 	};
+	std::string getName() const { return _name; }
 
 	//setters
 	void setKilled(bool k)
@@ -20,6 +22,7 @@ public:
 		_Killed = k;
 	};
 
-private:
+protected:
 	bool _Killed = false;
+	std::string _name;
 };

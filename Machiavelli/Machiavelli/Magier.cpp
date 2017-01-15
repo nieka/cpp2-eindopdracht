@@ -4,6 +4,7 @@
 
 Magier::Magier()
 {
+	_name = "Magier";
 }
 
 

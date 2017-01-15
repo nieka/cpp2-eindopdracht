@@ -4,6 +4,7 @@
 
 Prediker::Prediker()
 {
+	_name = "Prediker";
 }
 
 
