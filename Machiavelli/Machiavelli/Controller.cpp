@@ -18,7 +18,10 @@ void Controller::handleCommand(ClientCommand command)
 		if (!started) {
 			if (command.get_cmd() == "join") {
 				players.push_back(clientInfo->get_player());
-				playerSockets.insert({clientInfo->get_player().get_name(), std::move(clientInfo->get_socket()) });
+				//playerSockets.insert({clientInfo->get_player().get_name(), std::move(clientInfo->get_socket()) });
+
+				std::shared_ptr<ClientInfo> cinfo { clientInfo };
+				playerSockets.insert({ clientInfo->get_player().get_name(), cinfo });
 				if (players.size() == 2) {
 					started = true;
 					_gameController.setupGame(*this);
@@ -35,13 +38,13 @@ void Controller::printLine(const std::string value) const
 {
 	
 	for (auto const& player : playerSockets) {
-		player.second.write(value + "\r\n");
+		player.second->get_socket().write(value + "\r\n");
 	}
 }
 
 void Controller::printToPlayer(const std::string value, const std::string playerName) const
 {
-	playerSockets.at(playerName).write(value + "\r\n");
+	playerSockets.at(playerName)->get_socket().write(value + "\r\n");
 }
 
 void Controller::readLineOfPlayer(const std::string playerName) const

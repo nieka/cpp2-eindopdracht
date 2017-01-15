@@ -29,7 +29,7 @@ private:
 	Deck<std::unique_ptr<Card>> _cardDeck;
 	Deck<std::unique_ptr<IKarakter>> _karakterDeck;
 	std::vector<Player> players;
-	std::map<std::string,Socket> playerSockets;
+	std::map<std::string,std::shared_ptr<ClientInfo>> playerSockets;
 	GameController _gameController;
 	const std::string _cardPath = "Bouwkaarten.csv";
 	const std::string _karakterPath = "karakterkaarten.csv";
