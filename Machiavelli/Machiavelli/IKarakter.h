@@ -1,5 +1,5 @@
 #pragma once
-#include "Controller.h"
+class Controller;
 
 class IKarakter
 {
@@ -9,7 +9,7 @@ public:
 	virtual void play(Controller controller) = 0;
 
 	//getters
-	bool getKilled()
+	bool getKilled() const
 	{
 		return _Killed;
 	};

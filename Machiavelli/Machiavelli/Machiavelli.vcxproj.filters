@@ -48,24 +48,6 @@
     <ClInclude Include="Bouwmeester.h">
       <Filter>Header Files\Karakters</Filter>
     </ClInclude>
-    <ClInclude Include="Dief.h">
-      <Filter>Header Files\Karakters</Filter>
-    </ClInclude>
-    <ClInclude Include="Koning.h">
-      <Filter>Header Files\Karakters</Filter>
-    </ClInclude>
-    <ClInclude Include="Koopman.h">
-      <Filter>Header Files\Karakters</Filter>
-    </ClInclude>
-    <ClInclude Include="Magier.h">
-      <Filter>Header Files\Karakters</Filter>
-    </ClInclude>
-    <ClInclude Include="Moordenaar.h">
-      <Filter>Header Files\Karakters</Filter>
-    </ClInclude>
-    <ClInclude Include="Prediker.h">
-      <Filter>Header Files\Karakters</Filter>
-    </ClInclude>
     <ClInclude Include="throw.h">
       <Filter>Header Files\server</Filter>
     </ClInclude>
@@ -81,14 +63,32 @@
     <ClInclude Include="ClientInfo.h">
       <Filter>Header Files\server</Filter>
     </ClInclude>
-    <ClInclude Include="Condotierre.h">
-      <Filter>Header Files\Karakters</Filter>
-    </ClInclude>
     <ClInclude Include="Controller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameController.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dief.h">
+      <Filter>Header Files\Karakters</Filter>
+    </ClInclude>
+    <ClInclude Include="Moordenaar.h">
+      <Filter>Header Files\Karakters</Filter>
+    </ClInclude>
+    <ClInclude Include="Magier.h">
+      <Filter>Header Files\Karakters</Filter>
+    </ClInclude>
+    <ClInclude Include="Koning.h">
+      <Filter>Header Files\Karakters</Filter>
+    </ClInclude>
+    <ClInclude Include="Prediker.h">
+      <Filter>Header Files\Karakters</Filter>
+    </ClInclude>
+    <ClInclude Include="Koopman.h">
+      <Filter>Header Files\Karakters</Filter>
+    </ClInclude>
+    <ClInclude Include="Condottiere.h">
+      <Filter>Header Files\Karakters</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -98,34 +98,10 @@
     <ClCompile Include="Controller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Deck.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Card.cpp">
       <Filter>Source Files\cards</Filter>
     </ClCompile>
     <ClCompile Include="Bouwmeester.cpp">
-      <Filter>Source Files\karakters</Filter>
-    </ClCompile>
-    <ClCompile Include="Condotierre.cpp">
-      <Filter>Source Files\karakters</Filter>
-    </ClCompile>
-    <ClCompile Include="Dief.cpp">
-      <Filter>Source Files\karakters</Filter>
-    </ClCompile>
-    <ClCompile Include="Koopman.cpp">
-      <Filter>Source Files\karakters</Filter>
-    </ClCompile>
-    <ClCompile Include="Koning.cpp">
-      <Filter>Source Files\karakters</Filter>
-    </ClCompile>
-    <ClCompile Include="Magier.cpp">
-      <Filter>Source Files\karakters</Filter>
-    </ClCompile>
-    <ClCompile Include="Moordenaar.cpp">
-      <Filter>Source Files\karakters</Filter>
-    </ClCompile>
-    <ClCompile Include="Prediker.cpp">
       <Filter>Source Files\karakters</Filter>
     </ClCompile>
     <ClCompile Include="throw.cpp">
@@ -139,6 +115,27 @@
     </ClCompile>
     <ClCompile Include="GameController.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Dief.cpp">
+      <Filter>Source Files\karakters</Filter>
+    </ClCompile>
+    <ClCompile Include="Moordenaar.cpp">
+      <Filter>Source Files\karakters</Filter>
+    </ClCompile>
+    <ClCompile Include="Magier.cpp">
+      <Filter>Source Files\karakters</Filter>
+    </ClCompile>
+    <ClCompile Include="Koning.cpp">
+      <Filter>Source Files\karakters</Filter>
+    </ClCompile>
+    <ClCompile Include="Prediker.cpp">
+      <Filter>Source Files\karakters</Filter>
+    </ClCompile>
+    <ClCompile Include="Koopman.cpp">
+      <Filter>Source Files\karakters</Filter>
+    </ClCompile>
+    <ClCompile Include="Condottiere.cpp">
+      <Filter>Source Files\karakters</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

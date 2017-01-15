@@ -145,7 +145,7 @@
     <ClInclude Include="Bouwmeester.h" />
     <ClInclude Include="ClientCommand.h" />
     <ClInclude Include="ClientInfo.h" />
-    <ClInclude Include="Condotierre.h" />
+    <ClInclude Include="Condottiere.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Deck.h" />
     <ClInclude Include="Card.h" />
@@ -165,9 +165,8 @@
   <ItemGroup>
     <ClCompile Include="Bouwmeester.cpp" />
     <ClCompile Include="Card.cpp" />
-    <ClCompile Include="Condotierre.cpp" />
+    <ClCompile Include="Condottiere.cpp" />
     <ClCompile Include="Controller.cpp" />
-    <ClCompile Include="Deck.cpp" />
     <ClCompile Include="Dief.cpp" />
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="Koning.cpp" />

@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 #include <fstream>
 #include <istream>
 #include <Iostream>
@@ -10,6 +11,9 @@
 #include "Player.h"
 #include "Socket.h"
 #include "GameController.h"
+#include "IKarakter.h"
+
+class IKarakter;
 
 class Controller
 {
@@ -19,18 +23,24 @@ public:
 
 	void handleCommand(ClientCommand command);
 	void printLine(const std::string value);
-
+	void createCardDeck();
+	void createKarakterDeck();
 	std::vector<Player> getPlayers();
 	
 private:
-	Deck deck;
-	void createDeck(std::string filepath);
-	
 	bool started = false;
 
 	//variable
+	//Deck<Card> _cardDeck;
+	//Deck<IKarakter> _karakterDeck;
+
+	//pointers required for inheritance of the karakter cards
+	Deck<std::unique_ptr<Card>> _cardDeck;
+	Deck<std::unique_ptr<IKarakter>> _karakterDeck;
 	std::vector<Player> players;
 	std::vector<Socket> playerSockets;
 	GameController _gameController;
+	std::string _cardPath = "Bouwkaarten.csv";
+	std::string _karakterPath = "karakterkaarten.csv";
 };
 
