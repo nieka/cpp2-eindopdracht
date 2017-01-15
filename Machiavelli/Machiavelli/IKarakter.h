@@ -1,6 +1,8 @@
 #pragma once
 #include "Controller.h"
 
+class Controller;
+
 class IKarakter
 {
 public:

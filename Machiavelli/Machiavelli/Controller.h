@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 #include <fstream>
 #include <istream>
 #include <Iostream>
@@ -10,8 +11,9 @@
 #include "Player.h"
 #include "Socket.h"
 #include "GameController.h"
-//#include "IKarakter.h"
-//#include "DeckBuilder.h"
+#include "IKarakter.h"
+
+class IKarakter;
 
 class Controller
 {
@@ -31,6 +33,7 @@ private:
 	//variable
 	Deck<Card> _cardDeck;
 	//Deck<IKarakter> _karakterDeck;
+	Deck<std::unique_ptr<IKarakter>> _karakterDeck;
 	std::vector<Player> players;
 	std::vector<Socket> playerSockets;
 	GameController _gameController;

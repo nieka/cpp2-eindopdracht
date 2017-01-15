@@ -5,8 +5,8 @@
 
 Controller::Controller()
 {
-	createCardDeck();
-
+	//createCardDeck();
+	createKarakterDeck();
 }
 
 
@@ -43,24 +43,24 @@ void Controller::createCardDeck()
 	}
 
 	file.close();
-
+	_cardDeck.CreateCardDeck();
 	_cardDeck.shuffleDeck();
 }
 
 void Controller::createKarakterDeck()
 {
-	/*
-	std::ifstream file(_karakterPath);
+	std::ifstream file(_karakterPath); 
 	while (file.good())
 	{
 		file >> _karakterDeck;
 	}
 
 	file.close();
-
-	_karakterDeck.shuffleDeck();
-	*/
+	_karakterDeck.CreateIKarakterDeck();
+	//_karakterDeck.shuffleDeck();
+	
 }
+
 
 void Controller::printLine(const std::string value)
 {

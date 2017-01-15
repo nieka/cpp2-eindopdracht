@@ -145,19 +145,13 @@
     <ClInclude Include="Bouwmeester.h" />
     <ClInclude Include="ClientCommand.h" />
     <ClInclude Include="ClientInfo.h" />
-    <ClInclude Include="Condotierre.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Deck.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="Dief.h" />
     <ClInclude Include="GameController.h" />
     <ClInclude Include="IKarakter.h" />
-    <ClInclude Include="Koning.h" />
-    <ClInclude Include="Koopman.h" />
-    <ClInclude Include="Magier.h" />
-    <ClInclude Include="Moordenaar.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Prediker.h" />
     <ClInclude Include="Socket.h" />
     <ClInclude Include="Sync_queue.h" />
     <ClInclude Include="throw.h" />
@@ -165,18 +159,11 @@
   <ItemGroup>
     <ClCompile Include="Bouwmeester.cpp" />
     <ClCompile Include="Card.cpp" />
-    <ClCompile Include="Condotierre.cpp" />
     <ClCompile Include="Controller.cpp" />
-    <ClCompile Include="Deck.cpp" />
     <ClCompile Include="Dief.cpp" />
     <ClCompile Include="GameController.cpp" />
-    <ClCompile Include="Koning.cpp" />
-    <ClCompile Include="Koopman.cpp" />
-    <ClCompile Include="Magier.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Moordenaar.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Prediker.cpp" />
     <ClCompile Include="Socket.cpp" />
     <ClCompile Include="throw.cpp" />
   </ItemGroup>

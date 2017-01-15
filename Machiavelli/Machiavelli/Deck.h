@@ -9,8 +9,9 @@
 #include <stdlib.h>     
 #include <time.h>
 #include "Card.h"
+#include "IKarakter.h"
 
-template <class T>
+template <typename T>
 class Deck {
 public:
 	Deck<T>::Deck()
@@ -21,13 +22,13 @@ public:
 	{
 	}
 
-	T Deck<T>::drawCard()
-	{
-		T c = _deck.back();
-		_deck.pop_back();
+	//T Deck<T>::drawCard()
+	//{
+	//	T c = _deck.back();
+	//	_deck.pop_back();
 
-		return c;
-	}
+	//	return c;
+	//}
 
 	void Deck<T>::addCard(T & t)
 	{
@@ -36,14 +37,12 @@ public:
 
 	void Deck<T>::shuffleDeck()
 	{
-		std::vector<Card> newDeck;
+		std::vector<T> newDeck;
 
 		srand(time(NULL));
 		while (cardCollection.size() > 0)
 		{
 			int id = rand() % cardCollection.size();
-			//std::cout << std::to_string(id) << std::endl;
-
 			newDeck.push_back(cardCollection[id]);
 			cardCollection.erase(cardCollection.begin() + id);
 		}
@@ -51,9 +50,33 @@ public:
 		_deck = newDeck;
 	}
 
+	void Deck<T>::CreateCardDeck()
+	{
+		for (std::string output : _filestrings)
+		{
+			
+			output = replaceChar(output, '_', ' ');
+			std::vector<std::string> stringparts = splitString(output, ';');
+
+			Card card(stringparts[0], stringparts[2], std::stoi(stringparts[1]));
+			addCard(card);
+		}
+	}
+
+	void Deck<T>::CreateIKarakterDeck()
+	{
+		for (std::string output : _filestrings)
+		{
+			std::vector<std::string> stringparts = splitString(output, ';');
+			
+			//int id = std::stoi(stringparts[0]);
+		}
+	}
+
 private:
 	std::vector<T> cardCollection;
 	std::vector<T> _deck;
+	std::vector<std::string> _filestrings;
 
 	//replace char a for char b in string s
 	std::string  Deck<T>::replaceChar(std::string s, char a, char b)
@@ -76,8 +99,13 @@ private:
 		return i;
 	}
 
-	//stream operator, reads file, used to create the cards, and place them in the cardcollection vector
-	friend std::ifstream& operator >> (std::ifstream& is, Deck<Card>& deck)
+	void Deck<T>::addString(std::string s)
+	{
+		_filestrings.push_back(s);
+	}
+
+	//stream operator, reads file, place strings in filestring vector
+	friend std::ifstream& operator >> (std::ifstream& is, Deck<T>& deck)
 	{
 		std::string output;
 
@@ -85,11 +113,7 @@ private:
 		
 		if (output.size() > 0)
 		{
-			output = deck.replaceChar(output, '_', ' ');
-			std::vector<std::string> stringparts = deck.splitString(output, ';');
-
-			Card card(stringparts[0], stringparts[2], std::stoi(stringparts[1]));
-			deck.addCard(card);
+			deck.addString(output);
 		}
 		
 		return is;
