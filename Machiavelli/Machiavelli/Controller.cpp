@@ -35,13 +35,13 @@ void Controller::printLine(const std::string value) const
 {
 	
 	for (auto const& player : playerSockets) {
-		player.second.write(value + "\n");
+		player.second.write(value + "\r\n");
 	}
 }
 
 void Controller::printToPlayer(const std::string value, const std::string playerName) const
 {
-	playerSockets.at(playerName).write(value + "\n");
+	playerSockets.at(playerName).write(value + "\r\n");
 }
 
 void Controller::readLineOfPlayer(const std::string playerName) const

@@ -52,7 +52,7 @@ void GameController::setupGame(Controller& controller)
 
 		_kaartenOpTafel.push_back(_karakterDeck.drawCard());
 		controller.printToPlayer("Het karakter: " + _kaartenOpTafel.at(0)->getName() +  " is op de afleg stapel gelegd!", _currectPlayer.get_name());
-		controller.printToPlayer("Kies één van de karakters:", _currectPlayer.get_name());
+		controller.printToPlayer("Kies een van de karakters:", _currectPlayer.get_name());
 
 		for (int i = 0; i < _karakterDeck.getDeck().size(); ++i) {
 			controller.printToPlayer(i + ":" + _karakterDeck.getDeck().at(i)->getName(), _currectPlayer.get_name());
