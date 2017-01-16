@@ -1,4 +1,6 @@
 #pragma once
+#include <stdlib.h>     
+#include <time.h>
 #include "ClientCommand.h"
 #include "Player.h"
 #include "Deck.h"
@@ -15,5 +17,6 @@ public:
 	void HandleGameCommands(ClientCommand command, Controller& controller, GameController& gameController, Deck<std::shared_ptr<IKarakter>>& karakterDeck);
 private :
 	int step;
+	void skipePhase(Controller& controller, GameController& gameController, Deck<std::shared_ptr<IKarakter>>& karakterDeck);
 };
 
