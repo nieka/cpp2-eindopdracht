@@ -25,6 +25,7 @@ void Controller::handleCommand(ClientCommand command)
 				if (players.size() == 2) {
 					started = true;
 					_gameController.setupGame(*this);
+
 				}
 			}
 		}
@@ -46,13 +47,6 @@ void Controller::printToPlayer(const std::string value, const std::string player
 {
 	playerSockets.at(playerName)->get_socket().write(value + "\r\n");
 }
-
-void Controller::readLineOfPlayer(const std::string playerName) const
-{
-
-}
-
-
 
 std::vector<Player> Controller::getPlayers() const
 {

@@ -21,8 +21,10 @@ public:
 	Player& getCurrentPlayer();
 		
 	void karakterVerdeling(Controller& controller);
-
+	void toggleCurrentPlayer();
 	Deck<std::shared_ptr<IKarakter>> getKarakterCards() const;
+	void legKaartOpTafel(std::shared_ptr<IKarakter> karakter);
+	void setState(const GameStates state);
 
 private:
 	void createCardDeck();

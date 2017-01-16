@@ -44,6 +44,15 @@ public:
 		return _deck;
 	}
 
+	void removeCard(T card) {
+		//_deck.erase(std::remove(_deck.begin(), _deck.end(), card), _deck.end());
+		std::vector<T>::iterator position = std::find(_deck.begin(), _deck.end(), card);
+		if (position != _deck.end()) {
+			_deck.erase(position);
+		}
+			
+	}
+
 	void Deck<T>::CreateCardDeck()
 	{
 		//need random seed
