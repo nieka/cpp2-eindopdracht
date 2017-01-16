@@ -25,6 +25,9 @@ void GameController::HandleGameCommands(ClientCommand command, Controller& contr
 			{
 			case GameStates::KARAKTERVERDELING:
 				karakterVerdelingController.HandleGameCommands(command, controller, *this, _karakterDeck);
+			case GameStates::RONDEN:
+				controller.printLine("hoi");
+				break;
 			default:
 				break;
 			}
