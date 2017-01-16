@@ -5,8 +5,6 @@
 
 Controller::Controller()
 {
-	createCardDeck();
-	createKarakterDeck();
 }
 
 
@@ -20,11 +18,14 @@ void Controller::handleCommand(ClientCommand command)
 		if (!started) {
 			if (command.get_cmd() == "join") {
 				players.push_back(clientInfo->get_player());
-				playerSockets.push_back(std::move(clientInfo->get_socket()));
+				//playerSockets.insert({clientInfo->get_player().get_name(), std::move(clientInfo->get_socket()) });
+
+				std::shared_ptr<ClientInfo> cinfo { clientInfo };
+				playerSockets.insert({ clientInfo->get_player().get_name(), cinfo });
 				if (players.size() == 2) {
 					started = true;
 					_gameController.setupGame(*this);
-					printLine("The game begins");
+
 				}
 			}
 		}
@@ -34,39 +35,20 @@ void Controller::handleCommand(ClientCommand command)
 	}
 }
 
-void Controller::createCardDeck()
+void Controller::printLine(const std::string value) const
 {
-	std::ifstream file(_cardPath);
-	while (file.good())
-	{
-		file >> _cardDeck;
-	}
-
-	file.close();
-	_cardDeck.CreateCardDeck();
-}
-
-void Controller::createKarakterDeck()
-{
-	std::ifstream file(_karakterPath); 
-	while (file.good())
-	{
-		file >> _karakterDeck;
-	}
-
-	file.close();
-	_karakterDeck.CreateIKarakterDeck();
-}
-
-
-void Controller::printLine(const std::string value)
-{
-	for (int i = 0; i < playerSockets.size(); ++i) {
-		playerSockets.at(i).write(value);
+	
+	for (auto const& player : playerSockets) {
+		player.second->get_socket().write(value + "\r\n");
 	}
 }
 
-std::vector<Player> Controller::getPlayers()
+void Controller::printToPlayer(const std::string value, const std::string playerName) const
+{
+	playerSockets.at(playerName)->get_socket().write(value + "\r\n");
+}
+
+std::vector<Player> Controller::getPlayers() const
 {
 	return players;
 }

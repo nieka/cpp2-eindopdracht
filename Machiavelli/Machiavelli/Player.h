@@ -14,6 +14,7 @@
 #include <vector>
 #include <memory>
 #include "Card.h"
+#include "IKarakter.h"
 
 class Player {
 public:
@@ -36,11 +37,15 @@ public:
 
 	void drawCard();
 	void showHand();
+	void AddBouwCard(std::shared_ptr<Card> card);
+	void AddKarakterKaart(std::shared_ptr<IKarakter> card);
 private:
     std::string name;
 	int age; 
 	int _goudstukken;
-	std::vector<std::shared_ptr<Card>> _hand;
+	//pointers required for inheritance of the karakter cards
+	std::vector<std::shared_ptr<Card>> _bouwKaarten;
+	std::vector<std::shared_ptr<IKarakter>> _karakterKaarten;
 	bool _koning = false;
 };
 

@@ -3,6 +3,7 @@
 
 Koning::Koning()
 {
+	_name = "Koning";
 }
 
 

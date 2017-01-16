@@ -3,6 +3,7 @@
 
 Koopman::Koopman()
 {
+	_name = "Koopman";
 }
 
 

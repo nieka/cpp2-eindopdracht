@@ -34,10 +34,23 @@ public:
 
 	T Deck<T>::drawCard()
 	{
-		T c = _deck.back();
+		T c = std::move(_deck.back());
 		_deck.pop_back();
 
 		return c;
+	}
+
+	std::vector<T> getDeck() {
+		return _deck;
+	}
+
+	void removeCard(T card) {
+		//_deck.erase(std::remove(_deck.begin(), _deck.end(), card), _deck.end());
+		std::vector<T>::iterator position = std::find(_deck.begin(), _deck.end(), card);
+		if (position != _deck.end()) {
+			_deck.erase(position);
+		}
+			
 	}
 
 	void Deck<T>::CreateCardDeck()
@@ -112,7 +125,6 @@ public:
 	}
 
 private:
-	std::vector<T> cardCollection;
 	std::vector<T> _deck;
 	std::vector<std::string> _filestrings;
 
