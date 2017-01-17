@@ -8,5 +8,5 @@ public:
 	Dief();
 	~Dief();
 
-	void play(Controller controller);
+	void play(Controller & controller);
 };

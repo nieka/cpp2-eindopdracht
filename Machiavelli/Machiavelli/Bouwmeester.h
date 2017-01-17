@@ -8,6 +8,6 @@ public:
 	Bouwmeester();
 	~Bouwmeester();
 
-	void play(Controller controller);
+	void play(Controller & controller);
 };
 

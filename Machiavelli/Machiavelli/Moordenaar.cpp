@@ -12,6 +12,6 @@ Moordenaar::~Moordenaar()
 {
 }
 
-void Moordenaar::play(Controller controller)
+void Moordenaar::play(Controller & controller)
 {
 }

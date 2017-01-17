@@ -11,6 +11,6 @@ Koopman::~Koopman()
 {
 }
 
-void Koopman::play(Controller controller)
+void Koopman::play(Controller & )
 {
 }

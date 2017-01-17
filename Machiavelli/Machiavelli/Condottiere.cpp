@@ -12,6 +12,6 @@ Condottiere::~Condottiere()
 {
 }
 
-void Condottiere::play(Controller controller)
+void Condottiere::play(Controller & controller)
 {
 }

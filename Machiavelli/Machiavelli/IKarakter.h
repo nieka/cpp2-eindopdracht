@@ -7,7 +7,7 @@ class IKarakter
 public:
 	IKarakter() {};
 	~IKarakter() {};
-	virtual void play(Controller controller) = 0;
+	virtual void play(Controller & controller) = 0;
 
 	//getters
 	bool getKilled() const

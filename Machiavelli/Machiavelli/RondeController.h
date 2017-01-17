@@ -24,5 +24,6 @@ private:
 	bool inRound;
 	bool gotReward;
 	bool abilityUsed;
+	std::string currentKarakter = "";
 };
 

@@ -8,5 +8,5 @@ public:
 	Condottiere();
 	~Condottiere();
 
-	void play(Controller controller);
+	void play(Controller & controller);
 };

@@ -8,5 +8,5 @@ public:
 	Magier();
 	~Magier();
 
-	void play(Controller controller);
+	void play(Controller & controller);
 };

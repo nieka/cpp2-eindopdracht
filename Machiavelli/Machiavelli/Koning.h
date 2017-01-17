@@ -8,5 +8,5 @@ public:
 	Koning();
 	~Koning();
 
-	void play(Controller controller);
+	void play(Controller & controller);
 };
