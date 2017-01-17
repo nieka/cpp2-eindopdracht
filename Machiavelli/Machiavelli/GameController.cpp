@@ -24,12 +24,17 @@ void GameController::HandleGameCommands(ClientCommand command, Controller& contr
 			switch (_currentState)
 			{
 			case GameStates::KARAKTERVERDELING:
-				karakterVerdelingController.HandleGameCommands(command, controller, *this, _karakterDeck);
+				_karakterVerdelingController.HandleGameCommands(command, controller, *this, _karakterDeck);
+				break;
 			case GameStates::RONDEN:
-				controller.printLine("hoi");
+				_rondeController.HandleGameCommands(command, controller, *this, _cardDeck);
 				break;
 			default:
 				break;
+			}
+
+			if (_currentState == GameStates::RONDEN) {
+				_rondeController.startRound(controller, *this, _cardDeck);
 			}
 		}
 	}
@@ -71,15 +76,19 @@ void GameController::setupGame(Controller& controller)
 
 }
 
+Player GameController::getPlayer1() const
+{
+	return _player1;
+}
+
 Player & GameController::getCurrentPlayer()
 {
 	return _currectPlayer;
 }
 
-
-void GameController::karakterVerdeling(Controller& controller)
+Player GameController::getPlayer2() const
 {
-	
+	return _player2;
 }
 
 void GameController::toggleCurrentPlayer()

@@ -102,6 +102,9 @@
     <ClInclude Include="GameStates.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RondeController.h">
+      <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Player.cpp">
@@ -150,6 +153,9 @@
       <Filter>Source Files\controllers</Filter>
     </ClCompile>
     <ClCompile Include="KarakterVedelingController.cpp">
+      <Filter>Source Files\controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="RondeController.cpp">
       <Filter>Source Files\controllers</Filter>
     </ClCompile>
   </ItemGroup>

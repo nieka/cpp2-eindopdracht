@@ -160,6 +160,7 @@
     <ClInclude Include="Moordenaar.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Prediker.h" />
+    <ClInclude Include="RondeController.h" />
     <ClInclude Include="Socket.h" />
     <ClInclude Include="Sync_queue.h" />
     <ClInclude Include="throw.h" />
@@ -179,6 +180,7 @@
     <ClCompile Include="Moordenaar.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Prediker.cpp" />
+    <ClCompile Include="RondeController.cpp" />
     <ClCompile Include="Socket.cpp" />
     <ClCompile Include="throw.cpp" />
   </ItemGroup>

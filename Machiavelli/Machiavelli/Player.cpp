@@ -7,6 +7,7 @@
 //
 
 #include "Player.h"
+#include <algorithm>
 using namespace std;
 
 Player::~Player()
@@ -74,4 +75,15 @@ void Player::AddBouwCard(std::shared_ptr<Card> card)
 void Player::AddKarakterKaart(std::shared_ptr<IKarakter> card)
 {
 	_karakterKaarten.push_back(card);
+}
+
+const bool Player::hasKarakterKaart(const std::string name)
+{
+	bool hasCard = false;
+	std::for_each(_karakterKaarten.begin(), _karakterKaarten.end(), [&](std::shared_ptr<IKarakter> card) { if (card->getName() == name) {
+		hasCard = true;
+	}
+	});
+
+	return hasCard;
 }
