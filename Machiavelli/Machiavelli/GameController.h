@@ -30,8 +30,8 @@ public:
 	void setState(const GameStates state);
 
 private:
-	void createCardDeck();
-	void createKarakterDeck();
+	bool createCardDeck(Controller& con);
+	bool createKarakterDeck(Controller& con);
 
 	Deck<std::shared_ptr<Card>> _cardDeck;
 	Deck<std::shared_ptr<IKarakter>> _karakterDeck;

@@ -6,8 +6,6 @@
 
 GameController::GameController()
 {
-	createCardDeck();
-	createKarakterDeck();
 }
 
 GameController::~GameController()
@@ -42,6 +40,21 @@ void GameController::HandleGameCommands(ClientCommand command, Controller& contr
 
 void GameController::setupGame(Controller& controller)
 {
+	bool check = true;
+	
+	
+	if (!createCardDeck(controller))
+	{
+		check = false;
+	}
+
+	if (!createKarakterDeck(controller))
+	{
+		check = false;
+	}
+
+	if (check)
+	{
 		if (controller.getPlayers().at(0).getAge() < controller.getPlayers().at(1).getAge()) {
 			_player1 = controller.getPlayers().at(1);
 			_player1.setKoning(true);
@@ -62,18 +75,22 @@ void GameController::setupGame(Controller& controller)
 		}
 
 		controller.printLine(_player1.get_name() + " is de koning en mag beginnen.");
-		
+
 		_currentState = GameStates::KARAKTERVERDELING;
 		_currectPlayer = _player1;
 
 		_kaartenOpTafel.push_back(_karakterDeck.drawCard());
-		controller.printToPlayer("Het karakter: " + _kaartenOpTafel.at(0)->getName() +  " is omgekerd op tafel gelegd!", _currectPlayer.get_name());
+		controller.printToPlayer("Het karakter: " + _kaartenOpTafel.at(0)->getName() + " is omgekerd op tafel gelegd!", _currectPlayer.get_name());
 		controller.printToPlayer("Kies een van de karakters voor in je hand:", _currectPlayer.get_name());
 
 		for (int i = 0; i < _karakterDeck.getDeck().size(); ++i) {
 			controller.printToPlayer(std::to_string(i + 1) + ": " + _karakterDeck.getDeck().at(i)->getName(), _currectPlayer.get_name());
 		}
-
+	}
+	else
+	{
+		//stop game 
+	}
 }
 
 Player GameController::getPlayer1() const
@@ -120,26 +137,64 @@ void GameController::setState(const GameStates state)
 
 
 
-void GameController::createCardDeck()
+bool GameController::createCardDeck(Controller& con)
 {
-	std::ifstream file(_cardPath);
-	while (file.good())
-	{
-		file >> _cardDeck;
-	}
+	try {
+		std::ifstream file(_cardPath);
 
-	file.close();
-	_cardDeck.CreateCardDeck();
+		//when file is missing throw exception
+		if (!file)
+		{
+			throw std::exception();
+		}
+
+		while (file.good())
+		{
+			file >> _cardDeck;
+		}
+
+		file.close();
+		_cardDeck.CreateCardDeck();
+
+		return true;
+	}
+	catch (...)
+	{
+		con.printLine("Something went wrong during creating the building card deck.");
+		con.printLine("Please make sure both card files are in the game map.");
+
+		return false;
+	}
+	
 }
 
-void GameController::createKarakterDeck()
+bool GameController::createKarakterDeck(Controller& con)
 {
-	std::ifstream file(_karakterPath);
-	while (file.good())
-	{
-		file >> _karakterDeck;
-	}
+	try {
+		std::ifstream file(_karakterPath);
 
-	file.close();
-	_karakterDeck.CreateIKarakterDeck();
+		//when file is missing throw exception
+		if (!file)
+		{
+			throw std::exception();
+		}
+
+		while (file.good())
+		{
+			file >> _karakterDeck;
+		}
+
+		file.close();
+		_karakterDeck.CreateIKarakterDeck();
+
+		return true;
+	}
+	catch (...)
+	{
+		con.printLine("Something went wrong during creating the character card deck.");
+		con.printLine("Please make sure both card files are in the game map.");
+
+		return false;
+	}
 }
+	
