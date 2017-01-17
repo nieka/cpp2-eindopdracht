@@ -40,6 +40,7 @@ public:
 	void AddBouwCard(std::shared_ptr<Card> card);
 	void AddKarakterKaart(std::shared_ptr<IKarakter> card);
 	const bool hasKarakterKaart(const std::string name);
+	void playKarakterAbility(Controller & controller, std::string karakternaam);
 private:
     std::string name;
 	int age; 

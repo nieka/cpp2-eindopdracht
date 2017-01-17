@@ -11,6 +11,6 @@ Koning::~Koning()
 {
 }
 
-void Koning::play(Controller controller)
+void Koning::play(Controller & controller)
 {
 }

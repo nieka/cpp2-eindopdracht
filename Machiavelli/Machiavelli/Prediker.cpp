@@ -12,6 +12,6 @@ Prediker::~Prediker()
 {
 }
 
-void Prediker::play(Controller controller)
+void Prediker::play(Controller & controller)
 {
 }

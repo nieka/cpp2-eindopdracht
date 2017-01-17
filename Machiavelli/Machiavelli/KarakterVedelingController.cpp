@@ -20,7 +20,7 @@ void KarakterVedelingController::HandleGameCommands(ClientCommand command, Contr
 	{
 		if (karakterDeck.getDeck().size() == 7)
 		{
-			skipePhase(controller, gameController, karakterDeck);
+			skipPhase(controller, gameController, karakterDeck);
 		}
 	}
 	else
@@ -65,7 +65,7 @@ void KarakterVedelingController::HandleGameCommands(ClientCommand command, Contr
 	
 }
 
-void KarakterVedelingController::skipePhase(Controller& controller, GameController& gameController, Deck<std::shared_ptr<IKarakter>>& karakterDeck)
+void KarakterVedelingController::skipPhase(Controller& controller, GameController& gameController, Deck<std::shared_ptr<IKarakter>>& karakterDeck)
 {
 	//need random seed
 	srand(time(NULL));

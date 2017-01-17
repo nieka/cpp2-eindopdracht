@@ -12,6 +12,6 @@ Magier::~Magier()
 {
 }
 
-void Magier::play(Controller controller)
+void Magier::play(Controller & controller)
 {
 }

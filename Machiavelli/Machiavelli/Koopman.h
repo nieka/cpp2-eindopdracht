@@ -8,5 +8,5 @@ public:
 	Koopman();
 	~Koopman();
 
-	void play(Controller controller);
+	void play(Controller & controller);
 };

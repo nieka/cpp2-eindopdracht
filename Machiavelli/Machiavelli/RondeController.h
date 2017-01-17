@@ -22,5 +22,8 @@ private:
 	std::vector<std::string> _oproepVolgorde;
 	int counter;
 	bool inRound;
+	bool gotReward;
+	bool abilityUsed;
+	std::string currentKarakter = "";
 };
 

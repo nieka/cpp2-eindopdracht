@@ -8,5 +8,5 @@ public:
 	Moordenaar();
 	~Moordenaar();
 
-	void play(Controller controller);
+	void play(Controller & controller);
 };
