@@ -70,6 +70,7 @@ void KarakterVedelingController::skipePhase(Controller& controller, GameControll
 	//need random seed
 	srand(time(NULL));
 
+	//leg karakter kaarten op tafel
 	for (int i = 0; i < 3; ++i)
 	{
 		int id = rand() % karakterDeck.getDeck().size();
@@ -78,13 +79,14 @@ void KarakterVedelingController::skipePhase(Controller& controller, GameControll
 		gameController.legKaartOpTafel(card);
 	}
 
+	//geef spelers karakter kaarten
 	for (int j = 0; j < 4; ++j)
 	{
 		int id = rand() % karakterDeck.getDeck().size();
 		std::shared_ptr<IKarakter> card = std::move(karakterDeck.getDeck().at(id));
 		karakterDeck.removeCard(card);
 		gameController.getCurrentPlayer().AddKarakterKaart(card);
-
+		controller.printToPlayer("Het karakter: " + card->getName() + " is aan je hand toegevoegd!", gameController.getCurrentPlayer().get_name());
 		gameController.toggleCurrentPlayer();
 	}
 
