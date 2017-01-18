@@ -67,9 +67,22 @@ void RondeController::startRound(Controller & controller, GameController & gameC
 		bool playerHasCard = false;		
 		std::string karakterCardName;
 		while (!playerHasCard) {
-			currentKarakter = _oproepVolgorde.at(counter);
 
-			controller.printLine("De koning roeps de " + karakterCardName + " op!");
+			if (gameController.getKarakterByName(_oproepVolgorde.at(counter)).getKilled())
+			{
+				controller.printLine("de moordenaar heeft " + _oproepVolgorde.at(counter) + " vermoord.");
+				++counter;
+				if (counter == _oproepVolgorde.size()) {
+					counter = 0;
+				}
+			}
+			else if (gameController.getKarakterByName(_oproepVolgorde.at(counter)).getTarget())
+			{
+				controller.printLine("de dief heeft " + _oproepVolgorde.at(counter) + " bestolen.");
+			}
+
+			currentKarakter = _oproepVolgorde.at(counter);
+			controller.printLine("De koning roeps de " + currentKarakter + " op!");
 			//check if player 1 or two has the card
 			if (gameController.getPlayer1().hasKarakterKaart(currentKarakter)) {
 				playerHasCard = true;

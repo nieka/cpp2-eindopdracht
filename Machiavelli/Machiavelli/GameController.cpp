@@ -125,6 +125,17 @@ Deck<std::shared_ptr<IKarakter>> GameController::getKarakterCards() const
 	return _karakterDeck;
 }
 
+IKarakter & GameController::getKarakterByName(std::string name)
+{
+	for (std::shared_ptr<IKarakter> k : _karakterDeck.getDeck())
+	{
+		if (k->getName() == name)
+		{
+			return *k.get();
+		}
+	}
+}
+
 void GameController::legKaartOpTafel(std::shared_ptr<IKarakter> karakter)
 {
 	_kaartenOpTafel.push_back(karakter);

@@ -34,9 +34,13 @@ void Moordenaar::play(Controller & controller, GameController & gcon)
 		std::string input = controller.readLineOfPlayer(gcon.getCurrentPlayer().get_name());
 		int id = std::stoi(input);
 		
-		if (id < 1 && id < gcon.getKarakterCards().getDeck().size());
-		kill(gcon.getKarakterCards().getDeck().at(id - 1)->getName(), controller, gcon);
-		controller.printToPlayer("je hebt de " + gcon.getKarakterCards().getDeck().at(id - 1)->getName() + " vermoord", gcon.getCurrentPlayer().get_name());
+		if (id > 0 && id < gcon.getKarakterCards().getDeck().size())
+		{
+			kill(gcon.getKarakterCards().getDeck().at(id - 1)->getName(), controller, gcon);
+			controller.printToPlayer("je hebt de " + gcon.getKarakterCards().getDeck().at(id - 1)->getName() + " vermoord", gcon.getCurrentPlayer().get_name());
+			a = true;
+		}
+		
 	}
 
 }

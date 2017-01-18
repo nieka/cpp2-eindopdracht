@@ -26,6 +26,7 @@ public:
 
 	void toggleCurrentPlayer();
 	Deck<std::shared_ptr<IKarakter>> getKarakterCards() const;
+	IKarakter& getKarakterByName(std::string name);
 	void legKaartOpTafel(std::shared_ptr<IKarakter> karakter);
 	void setState(const GameStates state);
 
