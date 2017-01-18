@@ -95,3 +95,8 @@ void Player::playKarakterAbility(Controller & controller, GameController & gcon,
 	}
 	});
 }
+
+std::vector<std::shared_ptr<Card>> Player::getBouwKaarten() const
+{
+	return _bouwKaarten;
+}

@@ -43,6 +43,7 @@ public:
 	void AddKarakterKaart(std::shared_ptr<IKarakter> card);
 	const bool hasKarakterKaart(const std::string name);
 	void playKarakterAbility(Controller & controller, GameController & gcon, std::string karakternaam);
+	std::vector<std::shared_ptr<Card>> getBouwKaarten() const;
 private:
     std::string name;
 	int age; 

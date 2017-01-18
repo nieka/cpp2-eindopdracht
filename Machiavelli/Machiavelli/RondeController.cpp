@@ -6,6 +6,7 @@
 RondeController::RondeController()
 {
 	counter = 0;
+	_roudType = CHOOSING;
 	inRound = false;
 	gotReward = false;
 	abilityUsed = false;
@@ -30,31 +31,59 @@ void RondeController::HandleGameCommands(ClientCommand command, Controller & con
 		inRound = false;
 		gotReward = false;
 		abilityUsed = false;
+		_roudType = CHOOSING;
 		startRound(controller, gameController, cardDeck);
 	}
 	else
 	{
-		if (!gotReward)
+		switch (_roudType)
 		{
-			int nr = std::stoi(command.get_cmd());
-			switch (nr)
+		case (CHOOSING):
+			switch (std::stoi(command.get_cmd()))
 			{
-			case(1):
+			case(1) :
 				gameController.getCurrentPlayer().addGoudStukken(2);
 				controller.printToPlayer("je hebt 2 goudstukken erbij gekregen", gameController.getCurrentPlayer().get_name());
 				controller.printToPlayer("je hebt nu " + std::to_string(gameController.getCurrentPlayer().getGoudstukken()) + " goudstukken", gameController.getCurrentPlayer().get_name());
 				gotReward = true;
 				printRoundInfo(controller, gameController);
+				_roudType = BUILD;
 				break;
-			case(2):
-				controller.printToPlayer("Kies 1 van de volgende kaarten", gameController.getCurrentPlayer().get_name());
+			case(2) :
+				controller.printToPlayer("Kies 1 van de volgende kaarten om in je hand te nemen. De andere word op de afleg stapel gelegd.", gameController.getCurrentPlayer().get_name());
 				//bouwkaarten gedeelte
 				gotReward = true;
 				printRoundInfo(controller, gameController);
+				_roudType = GETBUILDCARD;
+				for (int i = 0; i < 2; ++i) {
+					_tempBouwkaarten.push_back(cardDeck.drawCard());
+					controller.printToPlayer(std::to_string(i + 1) + " " + _tempBouwkaarten.back()->getName(), gameController.getCurrentPlayer().get_name());
+				}
 			default:
 				controller.printToPlayer("niet het juiste nummer", gameController.getCurrentPlayer().get_name());
 				break;
 			}
+			break;
+		case(GETBUILDCARD) :
+			{
+				//get buildt card
+				int nr = std::stoi(command.get_cmd());
+				if (nr == 1 || nr == 2) {
+					gameController.getCurrentPlayer().AddBouwCard(_tempBouwkaarten.at(nr - 1));
+					//we maken de lijst weer leeg. De andere bouwkaart moet naar de afleg stapen dus die verwijderen we uit de game
+					_tempBouwkaarten.clear();
+					_roudType = BUILD;
+				}
+				else {
+					controller.printToPlayer("niet het juiste nummer", gameController.getCurrentPlayer().get_name());
+				}
+				break;
+			}
+		case (BUILD) :
+			//gebruik bouwkaart of doe niks
+			break;
+		default:
+			break;
 		}
 	}
 
@@ -65,7 +94,6 @@ void RondeController::startRound(Controller & controller, GameController & gameC
 {
 	if (!inRound) {
 		bool playerHasCard = false;		
-		std::string karakterCardName;
 		while (!playerHasCard) {
 
 			if (gameController.getKarakterByName(_oproepVolgorde.at(counter)).getKilled())
@@ -100,8 +128,7 @@ void RondeController::startRound(Controller & controller, GameController & gameC
 			if (counter == _oproepVolgorde.size()) {
 				counter = 0;
 			}
-		}
-		
+		}	
 
 		if (playerHasCard) {
 			//the current player has the card so we have a turn
@@ -114,12 +141,27 @@ void RondeController::startRound(Controller & controller, GameController & gameC
 
 void RondeController::printRoundInfo(Controller & controller, GameController & gameController)
 {
-	if (!gotReward)
+	switch (_roudType)
 	{
-		controller.printToPlayer("kies een van de volgende opties", gameController.getCurrentPlayer().get_name());
-		controller.printToPlayer("1: 2 goudstukken", gameController.getCurrentPlayer().get_name());
-		controller.printToPlayer("2: een gebouwkaart", gameController.getCurrentPlayer().get_name());
+		case (CHOOSING):
+			controller.printToPlayer("kies een van de volgende opties", gameController.getCurrentPlayer().get_name());
+			controller.printToPlayer("1: 2 goudstukken", gameController.getCurrentPlayer().get_name());
+			controller.printToPlayer("2: een gebouwkaart", gameController.getCurrentPlayer().get_name());
+			break;
+		case (BUILD):
+			controller.printToPlayer("kies een je bouwkaarten om te bouwen", gameController.getCurrentPlayer().get_name());
+			for(int i = 0; i < gameController.getCurrentPlayer().getBouwKaarten().size(); ++i)
+			{
+				controller.printToPlayer(std::to_string(i +1) + ": " + gameController.getCurrentPlayer().getBouwKaarten().at(i)->getName(), gameController.getCurrentPlayer().get_name());
+			}
+			break;
+		case (END):
+			controller.printToPlayer("type 'end' om de buurt te eindigen.", gameController.getCurrentPlayer().get_name());
+			break;
+		default:
+			break;
 	}
+	
 	if (!abilityUsed)
 	{
 		controller.printToPlayer("type 'ability' om je karakter ability te gebruiken", gameController.getCurrentPlayer().get_name());

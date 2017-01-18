@@ -4,6 +4,7 @@
 #include "ClientCommand.h"
 #include "Player.h"
 #include "Deck.h"
+#include "RoundType.h"
 
 class GameController;
 class Controller;
@@ -20,7 +21,9 @@ public:
 private:
 	void printRoundInfo(Controller& controller, GameController& gameController);
 	std::vector<std::string> _oproepVolgorde;
+	std::vector<std::shared_ptr<Card>> _tempBouwkaarten;
 	int counter;
+	RoundType _roudType;
 	bool inRound;
 	bool gotReward;
 	bool abilityUsed;
