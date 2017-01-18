@@ -70,6 +70,11 @@ void Controller::printToPlayer(const std::string value, const std::string player
 	playerSockets.at(playerName)->get_socket().write(value + "\r\n");
 }
 
+std::string Controller::readLineOfPlayer(const std::string playerName) const
+{
+	return playerSockets.at(playerName)->get_socket().readline();
+}
+
 std::vector<Player> Controller::getPlayers() const
 {
 	return players;

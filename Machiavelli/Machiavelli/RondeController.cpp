@@ -21,7 +21,7 @@ void RondeController::HandleGameCommands(ClientCommand command, Controller & con
 {	
 	if (command.get_cmd() == "ability" && !abilityUsed)
 	{
-		gameController.getCurrentPlayer().playKarakterAbility(controller, currentKarakter);
+		gameController.getCurrentPlayer().playKarakterAbility(controller, gameController, currentKarakter);
 		abilityUsed = true;
 	}
 	else if (command.get_cmd() == "end" && gotReward)

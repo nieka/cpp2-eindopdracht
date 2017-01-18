@@ -11,6 +11,6 @@ Dief::~Dief()
 {
 }
 
-void Dief::play(Controller & controller)
+void Dief::play(Controller & controller, GameController & gcon)
 {
 }

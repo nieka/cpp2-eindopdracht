@@ -88,10 +88,10 @@ const bool Player::hasKarakterKaart(const std::string name)
 	return hasCard;
 }
 
-void Player::playKarakterAbility(Controller & controller, std::string karakternaam)
+void Player::playKarakterAbility(Controller & controller, GameController & gcon, std::string karakternaam)
 {
 	std::for_each(_karakterKaarten.begin(), _karakterKaarten.end(), [&](std::shared_ptr<IKarakter> card) { if (card->getName() == karakternaam) {
-		card->play(controller);
+		card->play(controller, gcon);
 	}
 	});
 }

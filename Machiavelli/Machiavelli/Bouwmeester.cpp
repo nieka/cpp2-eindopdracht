@@ -11,7 +11,7 @@ Bouwmeester::~Bouwmeester()
 {
 }
 
-void Bouwmeester::play(Controller & controller)
+void Bouwmeester::play(Controller & controller, GameController & gcon)
 {
 	/*
 		Hij trekt 2 gebouwenkaarten. De bouwmeester mag in zijn beurt tot 3 gebouwenkaarten uitleggen. De

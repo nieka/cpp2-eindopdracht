@@ -11,6 +11,6 @@ Koopman::~Koopman()
 {
 }
 
-void Koopman::play(Controller & )
+void Koopman::play(Controller & controller, GameController & gcon)
 {
 }
