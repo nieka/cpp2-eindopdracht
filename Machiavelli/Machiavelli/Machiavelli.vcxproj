@@ -152,6 +152,7 @@
     <ClInclude Include="Dief.h" />
     <ClInclude Include="GameController.h" />
     <ClInclude Include="GameStates.h" />
+    <ClInclude Include="RoundType.h" />
     <ClInclude Include="IKarakter.h" />
     <ClInclude Include="KarakterVedelingController.h" />
     <ClInclude Include="Koning.h" />

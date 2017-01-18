@@ -95,3 +95,8 @@ void Player::playKarakterAbility(Controller & controller, std::string karakterna
 	}
 	});
 }
+
+std::vector<std::shared_ptr<Card>> Player::getBouwKaarten() const
+{
+	return _bouwKaarten;
+}
