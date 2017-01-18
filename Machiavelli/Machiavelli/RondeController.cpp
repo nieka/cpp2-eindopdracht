@@ -23,6 +23,7 @@ void RondeController::HandleGameCommands(ClientCommand command, Controller & con
 	{
 		gameController.getCurrentPlayer().playKarakterAbility(controller, gameController, currentKarakter);
 		abilityUsed = true;
+		printRoundInfo(controller, gameController);
 	}
 	else if (command.get_cmd() == "end" && gotReward)
 	{
@@ -43,11 +44,13 @@ void RondeController::HandleGameCommands(ClientCommand command, Controller & con
 				controller.printToPlayer("je hebt 2 goudstukken erbij gekregen", gameController.getCurrentPlayer().get_name());
 				controller.printToPlayer("je hebt nu " + std::to_string(gameController.getCurrentPlayer().getGoudstukken()) + " goudstukken", gameController.getCurrentPlayer().get_name());
 				gotReward = true;
+				printRoundInfo(controller, gameController);
 				break;
 			case(2):
 				controller.printToPlayer("Kies 1 van de volgende kaarten", gameController.getCurrentPlayer().get_name());
 				//bouwkaarten gedeelte
 				gotReward = true;
+				printRoundInfo(controller, gameController);
 			default:
 				controller.printToPlayer("niet het juiste nummer", gameController.getCurrentPlayer().get_name());
 				break;
@@ -65,6 +68,7 @@ void RondeController::startRound(Controller & controller, GameController & gameC
 		std::string karakterCardName;
 		while (!playerHasCard) {
 			currentKarakter = _oproepVolgorde.at(counter);
+
 			controller.printLine("De koning roeps de " + karakterCardName + " op!");
 			//check if player 1 or two has the card
 			if (gameController.getPlayer1().hasKarakterKaart(currentKarakter)) {
