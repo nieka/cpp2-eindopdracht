@@ -33,5 +33,6 @@ private:
 	GameController _gameController;
 	const std::string _cardPath = "Bouwkaarten.csv";
 	const std::string _karakterPath = "karakterkaarten.csv";
+	bool checkSocket(ClientInfo* ci);
 };
 
