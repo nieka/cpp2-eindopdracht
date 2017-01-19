@@ -27,6 +27,9 @@ private:
 	bool inRound;
 	bool gotReward;
 	bool abilityUsed;
+	bool _firstTomaxBuildings;
 	std::string currentKarakter = "";
+	const int BUILDINGSNEEDEDTOWIN = 1;
+	
 };
 

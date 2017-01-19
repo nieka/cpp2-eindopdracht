@@ -135,6 +135,24 @@ void GameController::setState(const GameStates state)
 	_currentState = state;
 }
 
+void GameController::endGame(Controller& controller)
+{
+	toggleCurrentPlayer();
+	int scorePlayer1 = getPlayer1().calculateScore();
+	int scorePlayer2 = getPlayer2().calculateScore();
+
+	if (scorePlayer1 > scorePlayer2) {
+		controller.printLine(getPlayer1().get_name() + " heeft de game gewonnen met " + std::to_string(scorePlayer1) + " punten!");
+	}
+	else {
+		controller.printLine(getPlayer1().get_name() + " heeft de game gewonnen met " + std::to_string(scorePlayer1) + " punten!");
+	}
+
+	controller.stop();
+
+
+}
+
 
 
 bool GameController::createCardDeck(Controller& con)

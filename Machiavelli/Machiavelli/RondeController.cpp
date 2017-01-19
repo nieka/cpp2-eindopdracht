@@ -10,6 +10,7 @@ RondeController::RondeController()
 	inRound = false;
 	gotReward = false;
 	abilityUsed = false;
+	_firstTomaxBuildings = false;
 	_oproepVolgorde = { "Moordenaar", "Dief", "Magiër", "Koning","Prediker","Koopman","Bouwmeester","Condottiere" };
 }
 
@@ -78,6 +79,9 @@ void RondeController::HandleGameCommands(ClientCommand command, Controller & con
 					std::shared_ptr<Card> bouwkaart = gameController.getCurrentPlayer().getBouwKaarten().at(buildNumber - 1);
 					if (bouwkaart->getWaarde() <= gameController.getCurrentPlayer().getGoudstukken()) {
 						gameController.getCurrentPlayer().bouwGebouw(bouwkaart);
+						if (gameController.getCurrentPlayer().getGebouwdeKaarten().size() == BUILDINGSNEEDEDTOWIN && !_firstTomaxBuildings) {
+							_firstTomaxBuildings = true;
+						}
 						_roudType = END;
 					}
 					else {
@@ -97,7 +101,7 @@ void RondeController::HandleGameCommands(ClientCommand command, Controller & con
 				_roudType = CHOOSING;
 				startRound(controller, gameController, cardDeck);
 			}
-			break;
+			return;
 		default:
 			break;
 		}
@@ -108,6 +112,12 @@ void RondeController::HandleGameCommands(ClientCommand command, Controller & con
 
 void RondeController::startRound(Controller & controller, GameController & gameController, Deck<std::shared_ptr<Card>> cardDeck)
 {
+	//check of de game is afgelopen
+	if (gameController.getPlayer1().getGebouwdeKaarten().size() == BUILDINGSNEEDEDTOWIN || gameController.getPlayer2().getGebouwdeKaarten().size() == BUILDINGSNEEDEDTOWIN) {
+		//de game is afgelopen
+		gameController.endGame(controller);
+		return;
+	}
 	if (!inRound) {
 		bool playerHasCard = false;		
 		while (!playerHasCard) {

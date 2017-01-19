@@ -54,9 +54,46 @@ void Player::setKoning(const bool koning)
 	_koning = koning;
 }
 
-const bool Player::isKoning()
+const bool Player::isKoning() const
 {
 	return _koning;
+}
+
+int Player::calculateScore()
+{
+	int score = 0;
+	std::vector<string> gebouwkleuren;
+	//gebouw punten optellen
+	for each (auto gebouw in _gebouwdeKaarten)
+	{
+		score += gebouw->getWaarde();
+		if (std::find(gebouwkleuren.begin(), gebouwkleuren.end(), gebouw->getColor()) == gebouwkleuren.end()) {
+			//kleur bestaat nog niet in de lijst
+			gebouwkleuren.push_back(gebouw->getColor());
+		}
+	}
+
+	//extra 2 punten als de speler 8 gebouwen heeft
+	if (_gebouwdeKaarten.size() == 8) {
+		score += 2;
+	}
+
+	//5 extra punten als de speler van elke kleur een gebouw heeft
+	if (gebouwkleuren.size() == 5) {
+		score += 5;
+	}
+
+	//4 punten voor de speler die als eerste 8 gebouwen bezat
+	if (_firstTomaxBuildings) {
+		score += 4;
+	}
+
+	return score;
+}
+
+void Player::setFirstToMaxBuildeings()
+{
+	_firstTomaxBuildings = true;
 }
 
 void Player::AddBouwCard(std::shared_ptr<Card> card)
