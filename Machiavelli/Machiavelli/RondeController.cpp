@@ -10,7 +10,8 @@ RondeController::RondeController()
 	inRound = false;
 	gotReward = false;
 	abilityUsed = false;
-	_oproepVolgorde = { "Moordenaar", "Dief", "Magiër", "Koning","Prediker","Koopman","Bouwmeester","Condottiere" };
+	_firstTomaxBuildings = false;
+	_oproepVolgorde = { "Moordenaar", "Dief", "Magier", "Koning","Prediker","Koopman","Bouwmeester","Condottiere" };
 	currentKarakter = _oproepVolgorde.at(0);
 }
 
@@ -29,14 +30,6 @@ void RondeController::HandleGameCommands(ClientCommand command, Controller & con
 		abilityUsed = true;
 		_roundType = _lastType;
 		//printRoundInfo(controller, gameController);
-	}
-	else if (command.get_cmd() == "end" && gotReward)
-	{
-		inRound = false;
-		gotReward = false;
-		abilityUsed = false;
-		_roundType = CHOOSING;
-		startRound(controller, gameController, cardDeck);
 	}
 	else
 	{
@@ -87,11 +80,45 @@ void RondeController::HandleGameCommands(ClientCommand command, Controller & con
 				break;
 			}
 		case (BUILD) :
+		{
 			//gebruik bouwkaart of doe niks
-			break;
-		case(ABILITY):
-			
+			if (command.get_cmd() == "geen") {
+				//de speller wil niks bouwen dus we gaan verder met de ronde
+				_roundType = END;
 				break;
+			}
+			int buildNumber = std::stoi(command.get_cmd());
+			if (buildNumber > 0 && buildNumber < gameController.getCurrentPlayer().getBouwKaarten().size()) {
+				std::shared_ptr<Card> bouwkaart = gameController.getCurrentPlayer().getBouwKaarten().at(buildNumber - 1);
+				if (bouwkaart->getWaarde() <= gameController.getCurrentPlayer().getGoudstukken()) {
+					gameController.getCurrentPlayer().bouwGebouw(bouwkaart);
+					if (gameController.getCurrentPlayer().getGebouwdeKaarten().size() == BUILDINGSNEEDEDTOWIN && !_firstTomaxBuildings) {
+						_firstTomaxBuildings = true;
+					}
+					_roundType = END;
+				}
+				else {
+					controller.printToPlayer("Je hebt niet genoeg goudstukken om het gebouw te bouwen", gameController.getCurrentPlayer().get_name());
+				}
+			}
+			else {
+				controller.printToPlayer("niet het juiste nummer", gameController.getCurrentPlayer().get_name());
+			}
+			break;
+		}
+		case(ABILITY):
+		{
+			break;
+		}
+			
+		case (END):
+			if (command.get_cmd() == "end") {
+				inRound = false;
+				gotReward = false;
+				abilityUsed = false;
+				_roundType = CHOOSING;
+				startRound(controller, gameController, cardDeck);
+			}
 		default:
 			break;
 		}
@@ -102,6 +129,12 @@ void RondeController::HandleGameCommands(ClientCommand command, Controller & con
 
 void RondeController::startRound(Controller & controller, GameController & gameController, Deck<std::shared_ptr<Card>> cardDeck)
 {
+	//check of de game is afgelopen
+	if (gameController.getPlayer1().getGebouwdeKaarten().size() == BUILDINGSNEEDEDTOWIN || gameController.getPlayer2().getGebouwdeKaarten().size() == BUILDINGSNEEDEDTOWIN) {
+		//de game is afgelopen
+		gameController.endGame(controller);
+		return;
+	}
 	if (!inRound) {
 		bool playerHasCard = false;		
 		while (!playerHasCard) {
@@ -151,22 +184,32 @@ void RondeController::startRound(Controller & controller, GameController & gameC
 
 void RondeController::printRoundInfo(Controller & controller, GameController & gameController)
 {
+	//print gebouwde kaarten
+	Player& currentPlayer = gameController.getCurrentPlayer();
+	std::string name = currentPlayer.get_name();
+	controller.printToPlayer("De voglende gebouwen heb je gebouwd:", name);
+	for each (auto kaart in currentPlayer.getGebouwdeKaarten())
+	{
+		controller.printToPlayer(kaart->getName(), name);
+	}
+
 	switch (_roundType)
 	{
 		case (CHOOSING):
-			controller.printToPlayer("kies een van de volgende opties", gameController.getCurrentPlayer().get_name());
-			controller.printToPlayer("1: 2 goudstukken", gameController.getCurrentPlayer().get_name());
-			controller.printToPlayer("2: een gebouwkaart", gameController.getCurrentPlayer().get_name());
+			controller.printToPlayer("kies een van de volgende opties", name);
+			controller.printToPlayer("1: 2 goudstukken", name);
+			controller.printToPlayer("2: een gebouwkaart", name);
 			break;
 		case (BUILD):
-			controller.printToPlayer("kies een je bouwkaarten om te bouwen", gameController.getCurrentPlayer().get_name());
-			for(int i = 0; i < gameController.getCurrentPlayer().getBouwKaarten().size(); ++i)
+			controller.printToPlayer("kies een je bouwkaarten om te bouwen", name);
+			for(int i = 0; i < currentPlayer.getBouwKaarten().size(); ++i)
 			{
-				controller.printToPlayer(std::to_string(i +1) + ": " + gameController.getCurrentPlayer().getBouwKaarten().at(i)->getName(), gameController.getCurrentPlayer().get_name());
+				controller.printToPlayer(std::to_string(i +1) + ": " + currentPlayer.getBouwKaarten().at(i)->getName(), name);
 			}
+			controller.printToPlayer("Of type geen om niks te bouwen", name);
 			break;
 		case (END):
-			controller.printToPlayer("type 'end' om de buurt te eindigen.", gameController.getCurrentPlayer().get_name());
+			controller.printToPlayer("type 'end' om de buurt te eindigen.", name);
 			break;
 		default:
 			break;

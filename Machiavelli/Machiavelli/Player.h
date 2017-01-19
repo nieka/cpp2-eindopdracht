@@ -20,7 +20,7 @@ class GameController;
 
 class Player {
 public:
-    Player() {}
+	Player() { _firstTomaxBuildings = false; }
 	Player(const std::string& name, int age) : name{ name }, age{ age } {}
 	~Player();
 
@@ -35,14 +35,18 @@ public:
 	void addGoudStukken(int extre_goudstukken);
 	void setGoudStukkken(int goudstukken);
 	void setKoning(const bool koning);
-	const bool isKoning();
+	const bool isKoning() const;
 
-	void drawCard();
-	void showHand();
+	int calculateScore();
+	void setFirstToMaxBuildeings();
+
+
 	void AddBouwCard(std::shared_ptr<Card> card);
 	void AddKarakterKaart(std::shared_ptr<IKarakter> card);
+	void bouwGebouw(std::shared_ptr<Card> card);
 	const bool hasKarakterKaart(const std::string name);
 	std::vector<std::shared_ptr<Card>> getBouwKaarten() const;
+	std::vector<std::shared_ptr<Card>> getGebouwdeKaarten() const;
 private:
     std::string name;
 	int age; 
@@ -50,7 +54,9 @@ private:
 	//pointers required for inheritance of the karakter cards
 	std::vector<std::shared_ptr<Card>> _bouwKaarten;
 	std::vector<std::shared_ptr<IKarakter>> _karakterKaarten;
+	std::vector<std::shared_ptr<Card>> _gebouwdeKaarten;
 	bool _koning = false;
+	bool _firstTomaxBuildings;
 };
 
 #endif /* Player_hpp */

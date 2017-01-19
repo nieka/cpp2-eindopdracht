@@ -75,6 +75,12 @@ std::string Controller::readLineOfPlayer(const std::string playerName) const
 	return playerSockets.at(playerName)->get_socket().readline();
 }
 
+void Controller::stop()
+{
+	players.clear();
+	playerSockets.clear();
+}
+
 std::vector<Player> Controller::getPlayers() const
 {
 	return players;

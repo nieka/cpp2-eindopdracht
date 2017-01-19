@@ -30,6 +30,8 @@ public:
 	void legKaartOpTafel(std::shared_ptr<IKarakter> karakter);
 	void setState(const GameStates state);
 
+	void endGame(Controller& controller);
+
 private:
 	bool createCardDeck(Controller& con);
 	bool createKarakterDeck(Controller& con);
