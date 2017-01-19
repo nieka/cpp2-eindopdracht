@@ -13,8 +13,6 @@ Moordenaar::~Moordenaar()
 
 void Moordenaar::karakterInfo(Controller & controller, GameController & gcon)
 {
-	//std::vector<std::string> _names;
-	
 	int counter = 1;
 	
 	controller.printToPlayer("welk karakter wil je vermoorden", gcon.getCurrentPlayer().get_name());

@@ -160,7 +160,7 @@ void RondeController::startRound(Controller & controller, GameController & gameC
 			}
 			else if (gameController.getKarakterByName(currentKarakter).getTarget())
 			{
-				controller.printLine("de dief heeft " + currentKarakter + " bestolen.");
+				controller.printLine("de dief heeft de " + currentKarakter + " bestolen.");
 			}
 
 			
