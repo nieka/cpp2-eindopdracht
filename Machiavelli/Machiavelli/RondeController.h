@@ -23,7 +23,8 @@ private:
 	std::vector<std::string> _oproepVolgorde;
 	std::vector<std::shared_ptr<Card>> _tempBouwkaarten;
 	int counter;
-	RoundType _roudType;
+	RoundType _lastType;
+	RoundType _roundType;
 	bool inRound;
 	bool gotReward;
 	bool abilityUsed;
