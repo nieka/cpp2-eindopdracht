@@ -12,6 +12,11 @@ Condottiere::~Condottiere()
 {
 }
 
-void Condottiere::play(Controller & controller)
+void Condottiere::karakterInfo(Controller & controller, GameController & gcon)
 {
+}
+
+bool Condottiere::play(int input, Controller & controller, GameController & gcon)
+{
+	return true;
 }

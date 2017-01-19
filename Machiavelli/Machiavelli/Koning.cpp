@@ -11,6 +11,11 @@ Koning::~Koning()
 {
 }
 
-void Koning::play(Controller & controller)
+void Koning::karakterInfo(Controller & controller, GameController & gcon)
 {
+}
+
+bool Koning::play(int input, Controller & controller, GameController & gcon)
+{
+	return true;
 }

@@ -16,6 +16,8 @@
 #include "Card.h"
 #include "IKarakter.h"
 
+class GameController;
+
 class Player {
 public:
 	Player() { _firstTomaxBuildings = false; }
@@ -43,7 +45,6 @@ public:
 	void AddKarakterKaart(std::shared_ptr<IKarakter> card);
 	void bouwGebouw(std::shared_ptr<Card> card);
 	const bool hasKarakterKaart(const std::string name);
-	void playKarakterAbility(Controller & controller, std::string karakternaam);
 	std::vector<std::shared_ptr<Card>> getBouwKaarten() const;
 	std::vector<std::shared_ptr<Card>> getGebouwdeKaarten() const;
 private:

@@ -123,15 +123,6 @@ const bool Player::hasKarakterKaart(const std::string name)
 	return hasCard;
 }
 
-void Player::playKarakterAbility(Controller & controller, std::string karakternaam)
-{
-	std::for_each(_karakterKaarten.begin(), _karakterKaarten.end(), [&](std::shared_ptr<IKarakter> card) { 
-		if (card->getName() == karakternaam) {
-			card->play(controller);
-		}
-	});
-}
-
 std::vector<std::shared_ptr<Card>> Player::getBouwKaarten() const
 {
 	return _bouwKaarten;
