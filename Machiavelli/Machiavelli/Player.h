@@ -35,13 +35,14 @@ public:
 	void setKoning(const bool koning);
 	const bool isKoning();
 
-	void drawCard();
-	void showHand();
+
 	void AddBouwCard(std::shared_ptr<Card> card);
 	void AddKarakterKaart(std::shared_ptr<IKarakter> card);
+	void bouwGebouw(std::shared_ptr<Card> card);
 	const bool hasKarakterKaart(const std::string name);
 	void playKarakterAbility(Controller & controller, std::string karakternaam);
 	std::vector<std::shared_ptr<Card>> getBouwKaarten() const;
+	std::vector<std::shared_ptr<Card>> getGebouwdeKaarten() const;
 private:
     std::string name;
 	int age; 
@@ -49,6 +50,7 @@ private:
 	//pointers required for inheritance of the karakter cards
 	std::vector<std::shared_ptr<Card>> _bouwKaarten;
 	std::vector<std::shared_ptr<IKarakter>> _karakterKaarten;
+	std::vector<std::shared_ptr<Card>> _gebouwdeKaarten;
 	bool _koning = false;
 };
 

@@ -59,14 +59,6 @@ const bool Player::isKoning()
 	return _koning;
 }
 
-void Player::drawCard()
-{
-}
-
-void Player::showHand()
-{
-}
-
 void Player::AddBouwCard(std::shared_ptr<Card> card)
 {
 	_bouwKaarten.push_back(card);
@@ -75,6 +67,12 @@ void Player::AddBouwCard(std::shared_ptr<Card> card)
 void Player::AddKarakterKaart(std::shared_ptr<IKarakter> card)
 {
 	_karakterKaarten.push_back(card);
+}
+
+void Player::bouwGebouw(std::shared_ptr<Card> card)
+{
+	_bouwKaarten.erase(std::remove(_bouwKaarten.begin(), _bouwKaarten.end(), card), _bouwKaarten.end());
+	_gebouwdeKaarten.push_back(card);
 }
 
 const bool Player::hasKarakterKaart(const std::string name)
@@ -90,13 +88,19 @@ const bool Player::hasKarakterKaart(const std::string name)
 
 void Player::playKarakterAbility(Controller & controller, std::string karakternaam)
 {
-	std::for_each(_karakterKaarten.begin(), _karakterKaarten.end(), [&](std::shared_ptr<IKarakter> card) { if (card->getName() == karakternaam) {
-		card->play(controller);
-	}
+	std::for_each(_karakterKaarten.begin(), _karakterKaarten.end(), [&](std::shared_ptr<IKarakter> card) { 
+		if (card->getName() == karakternaam) {
+			card->play(controller);
+		}
 	});
 }
 
 std::vector<std::shared_ptr<Card>> Player::getBouwKaarten() const
 {
 	return _bouwKaarten;
+}
+
+std::vector<std::shared_ptr<Card>> Player::getGebouwdeKaarten() const
+{
+	return _gebouwdeKaarten;
 }
