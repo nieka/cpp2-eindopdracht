@@ -12,6 +12,11 @@ Prediker::~Prediker()
 {
 }
 
-void Prediker::play(Controller & controller, GameController & gcon)
+void Prediker::karakterInfo(Controller & controller, GameController & gcon)
 {
+}
+
+bool Prediker::play(int input, Controller & controller, GameController & gcon)
+{
+	return true;
 }

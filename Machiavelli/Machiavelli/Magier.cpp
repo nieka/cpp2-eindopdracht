@@ -12,6 +12,11 @@ Magier::~Magier()
 {
 }
 
-void Magier::play(Controller & controller, GameController & gcon)
+void Magier::karakterInfo(Controller & controller, GameController & gcon)
 {
+}
+
+bool Magier::play(int input, Controller & controller, GameController & gcon)
+{
+	return true;
 }

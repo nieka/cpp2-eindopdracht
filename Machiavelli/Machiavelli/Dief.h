@@ -10,5 +10,6 @@ public:
 	Dief();
 	~Dief();
 
-	void play(Controller & controller, GameController & gcon);
+	void karakterInfo(Controller & controller, GameController & gcon);
+	bool play(int input, Controller & controller, GameController & gcon);
 };

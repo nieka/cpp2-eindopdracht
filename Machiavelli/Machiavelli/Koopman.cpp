@@ -11,6 +11,11 @@ Koopman::~Koopman()
 {
 }
 
-void Koopman::play(Controller & controller, GameController & gcon)
+void Koopman::karakterInfo(Controller & controller, GameController & gcon)
 {
+}
+
+bool Koopman::play(int input, Controller & controller, GameController & gcon)
+{
+	return true;
 }

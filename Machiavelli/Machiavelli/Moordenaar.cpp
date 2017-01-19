@@ -1,7 +1,6 @@
 #include "Moordenaar.h"
 #include "Controller.h"
 
-
 Moordenaar::Moordenaar()
 {
 	_name = "Moordenaar";
@@ -12,38 +11,46 @@ Moordenaar::~Moordenaar()
 {
 }
 
-void Moordenaar::play(Controller & controller, GameController & gcon)
+void Moordenaar::karakterInfo(Controller & controller, GameController & gcon)
 {
+	//std::vector<std::string> _names;
+	
 	int counter = 1;
-	std::vector<std::string> names;
+	
 	controller.printToPlayer("welk karakter wil je vermoorden", gcon.getCurrentPlayer().get_name());
 
-	for (std::shared_ptr<IKarakter> k : gcon.getKarakterCards().getDeck())
+	
+	if (_names.size() == 0)
 	{
-		if (k->getName() != "Moordenaar")
+		for (std::shared_ptr<IKarakter> k : gcon.getKarakterCards().getDeck())
 		{
-			controller.printToPlayer(std::to_string(counter) + " " + k->getName(), gcon.getCurrentPlayer().get_name());
-			names.push_back(k->getName());
-			++counter;
+			if (k->getName() != "Moordenaar")
+			{
+				_names.push_back(k->getName());
+			}
 		}
 	}
 
-	bool a = false;
-
-	while (!a)
+	for (std::string k : _names)
 	{
-		std::string input = controller.readLineOfPlayer(gcon.getCurrentPlayer().get_name());
-		int id = std::stoi(input);
+		controller.printToPlayer(std::to_string(counter) + " " + k, gcon.getCurrentPlayer().get_name());
+		++counter;
+	}
+	
+}
+
+bool Moordenaar::play(int input, Controller & controller, GameController & gcon)
+{
+
 		
-		if (id > 0 && id < gcon.getKarakterCards().getDeck().size())
-		{
-			kill(names.at(id - 1), controller, gcon);
-			controller.printToPlayer("je hebt de " + names.at(id - 1) + " vermoord", gcon.getCurrentPlayer().get_name());
-			a = true;
-		}
-		
+	if (input > 0 && input < gcon.getKarakterCards().getDeck().size())
+	{
+		kill(_names.at(input - 1), controller, gcon);
+		controller.printToPlayer("je hebt de " + _names.at(input - 1) + " vermoord", gcon.getCurrentPlayer().get_name());
+		return true;
 	}
 
+	return false;
 }
 
 void Moordenaar::kill(std::string name, Controller & controller, GameController & gcon)

@@ -22,14 +22,10 @@ RondeController::~RondeController()
 
 void RondeController::HandleGameCommands(ClientCommand command, Controller & controller, GameController & gameController, Deck<std::shared_ptr<Card>> cardDeck)
 {	
-	if (command.get_cmd() == "ability" && !abilityUsed)
+	if (command.get_cmd() == "ability" && !abilityUsed && _roundType != RoundType::ABILITY)
 	{
 		_lastType = _roundType;
 		_roundType = ABILITY;
-		gameController.getKarakterByName(currentKarakter).play(controller, gameController);
-		abilityUsed = true;
-		_roundType = _lastType;
-		//printRoundInfo(controller, gameController);
 	}
 	else
 	{
@@ -38,7 +34,7 @@ void RondeController::HandleGameCommands(ClientCommand command, Controller & con
 		case (CHOOSING):
 			switch (std::stoi(command.get_cmd()))
 			{
-			case(1) :
+			case(1):
 				gameController.getCurrentPlayer().addGoudStukken(2);
 				controller.printToPlayer("je hebt 2 goudstukken erbij gekregen", gameController.getCurrentPlayer().get_name());
 				controller.printToPlayer("je hebt nu " + std::to_string(gameController.getCurrentPlayer().getGoudstukken()) + " goudstukken", gameController.getCurrentPlayer().get_name());
@@ -47,7 +43,7 @@ void RondeController::HandleGameCommands(ClientCommand command, Controller & con
 				_lastType = CHOOSING;
 				_roundType = BUILD;
 				break;
-			case(2) :
+			case(2):
 				controller.printToPlayer("Kies 1 van de volgende kaarten om in je hand te nemen. De andere word op de afleg stapel gelegd.", gameController.getCurrentPlayer().get_name());
 				//bouwkaarten gedeelte
 				gotReward = true;
@@ -63,23 +59,23 @@ void RondeController::HandleGameCommands(ClientCommand command, Controller & con
 				break;
 			}
 			break;
-		case(GETBUILDCARD) :
-			{
-				//get buildt card
-				int nr = std::stoi(command.get_cmd());
-				if (nr == 1 || nr == 2) {
-					gameController.getCurrentPlayer().AddBouwCard(_tempBouwkaarten.at(nr - 1));
-					//we maken de lijst weer leeg. De andere bouwkaart moet naar de afleg stapen dus die verwijderen we uit de game
-					_tempBouwkaarten.clear();
-					_lastType = GETBUILDCARD;
-					_roundType = BUILD;
-				}
-				else {
-					controller.printToPlayer("niet het juiste nummer", gameController.getCurrentPlayer().get_name());
-				}
-				break;
+		case(GETBUILDCARD):
+		{
+			//get buildt card
+			int nr = std::stoi(command.get_cmd());
+			if (nr == 1 || nr == 2) {
+				gameController.getCurrentPlayer().AddBouwCard(_tempBouwkaarten.at(nr - 1));
+				//we maken de lijst weer leeg. De andere bouwkaart moet naar de afleg stapen dus die verwijderen we uit de game
+				_tempBouwkaarten.clear();
+				_lastType = GETBUILDCARD;
+				_roundType = BUILD;
 			}
-		case (BUILD) :
+			else {
+				controller.printToPlayer("niet het juiste nummer", gameController.getCurrentPlayer().get_name());
+			}
+			break;
+		}
+		case (BUILD):
 		{
 			//gebruik bouwkaart of doe niks
 			if (command.get_cmd() == "geen") {
@@ -108,9 +104,21 @@ void RondeController::HandleGameCommands(ClientCommand command, Controller & con
 		}
 		case(ABILITY):
 		{
+			int input = std::stoi(command.get_cmd());
+
+			if (gameController.getKarakterByName(currentKarakter).play(input, controller, gameController))
+			{
+				abilityUsed = true;
+				_roundType = _lastType;
+			}
+			else
+			{
+				controller.printToPlayer("voer het juiste getal in.", gameController.getCurrentPlayer().get_name());
+			}
+
 			break;
 		}
-			
+
 		case (END):
 			if (command.get_cmd() == "end") {
 				inRound = false;
@@ -138,6 +146,7 @@ void RondeController::startRound(Controller & controller, GameController & gameC
 	if (!inRound) {
 		bool playerHasCard = false;		
 		while (!playerHasCard) {
+			currentKarakter = _oproepVolgorde.at(counter);
 
 			if (gameController.getKarakterByName(currentKarakter).getKilled())
 			{
@@ -146,13 +155,15 @@ void RondeController::startRound(Controller & controller, GameController & gameC
 				if (counter == _oproepVolgorde.size()) {
 					counter = 0;
 				}
+
+				currentKarakter = _oproepVolgorde.at(counter);
 			}
 			else if (gameController.getKarakterByName(currentKarakter).getTarget())
 			{
 				controller.printLine("de dief heeft " + currentKarakter + " bestolen.");
 			}
 
-			currentKarakter = _oproepVolgorde.at(counter);
+			
 			controller.printLine("De koning roeps de " + currentKarakter + " op!");
 			//check if player 1 or two has the card
 			if (gameController.getPlayer1().hasKarakterKaart(currentKarakter)) {
@@ -208,6 +219,9 @@ void RondeController::printRoundInfo(Controller & controller, GameController & g
 			}
 			controller.printToPlayer("Of type geen om niks te bouwen", name);
 			break;
+		case(ABILITY):
+			gameController.getKarakterByName(currentKarakter).karakterInfo(controller, gameController);
+			break;
 		case (END):
 			controller.printToPlayer("type 'end' om de buurt te eindigen.", name);
 			break;
@@ -215,7 +229,7 @@ void RondeController::printRoundInfo(Controller & controller, GameController & g
 			break;
 	}
 	
-	if (!abilityUsed)
+	if (!abilityUsed && _roundType != RoundType::ABILITY)
 	{
 		controller.printToPlayer("type 'ability' om je karakter ability te gebruiken", gameController.getCurrentPlayer().get_name());
 	}

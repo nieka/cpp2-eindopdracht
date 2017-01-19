@@ -8,7 +8,8 @@ class IKarakter
 public:
 	IKarakter() {};
 	~IKarakter() {};
-	virtual void play(Controller & controller, GameController & gcon) = 0;
+	virtual bool play(int input, Controller & controller, GameController & gcon) = 0;
+	virtual void karakterInfo(Controller & controller, GameController & gcon) = 0;
 
 	//getters
 	bool getKilled() const { return _Killed; };
