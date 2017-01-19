@@ -29,7 +29,7 @@ private:
 	bool abilityUsed;
 	bool _firstTomaxBuildings;
 	std::string currentKarakter = "";
-	const int BUILDINGSNEEDEDTOWIN = 1;
+	const int BUILDINGSNEEDEDTOWIN = 8;
 	
 };
 
