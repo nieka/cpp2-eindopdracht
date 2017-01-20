@@ -47,6 +47,7 @@ public:
 	const bool hasKarakterKaart(const std::string name);
 	std::vector<std::shared_ptr<Card>> getBouwKaarten() const;
 	std::vector<std::shared_ptr<Card>> getGebouwdeKaarten() const;
+	void setBouwkaarten(std::vector<std::shared_ptr<Card>> cards);
 private:
     std::string name;
 	int age; 

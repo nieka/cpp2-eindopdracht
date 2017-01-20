@@ -132,3 +132,8 @@ std::vector<std::shared_ptr<Card>> Player::getGebouwdeKaarten() const
 {
 	return _gebouwdeKaarten;
 }
+
+void Player::setBouwkaarten(std::vector<std::shared_ptr<Card>> cards)
+{
+	_bouwKaarten = cards;
+}
