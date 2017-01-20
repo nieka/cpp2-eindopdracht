@@ -148,20 +148,7 @@ void RondeController::startRound(Controller & controller, GameController & gameC
 		while (!playerHasCard) {
 			currentKarakter = _oproepVolgorde.at(counter);
 
-			if (gameController.getKarakterByName(currentKarakter).getKilled())
-			{
-				controller.printLine("de moordenaar heeft " + currentKarakter + " vermoord.");
-				++counter;
-				if (counter == _oproepVolgorde.size()) {
-					counter = 0;
-				}
-
-				currentKarakter = _oproepVolgorde.at(counter);
-			}
-			else if (gameController.getKarakterByName(currentKarakter).getTarget())
-			{
-				controller.printLine("de dief heeft de " + currentKarakter + " bestolen.");
-			}
+			
 
 			
 			controller.printLine("De koning roeps de " + currentKarakter + " op!");
@@ -178,6 +165,35 @@ void RondeController::startRound(Controller & controller, GameController & gameC
 					gameController.toggleCurrentPlayer();
 				}
 			}
+
+			if (gameController.getKarakterByName(currentKarakter).getKilled())
+			{
+				controller.printLine("de moordenaar heeft " + currentKarakter + " vermoord.");
+				++counter;
+				if (counter == _oproepVolgorde.size()) {
+					counter = 0;
+				}
+
+				startRound(controller, gameController, cardDeck);
+			}
+			else if (gameController.getKarakterByName(currentKarakter).getTarget())
+			{
+				controller.printLine("de dief heeft de " + currentKarakter + " bestolen.");
+				int goud = gameController.getCurrentPlayer().getGoudstukken();
+				gameController.getCurrentPlayer().setGoudStukkken(0);
+				controller.printToPlayer("je hebt nu " + std::to_string(gameController.getCurrentPlayer().getGoudstukken()) + " goudstukken.", gameController.getCurrentPlayer().get_name());
+				if (gameController.getPlayer1().hasKarakterKaart("Dief"))
+				{
+					gameController.getPlayer1().addGoudStukken(goud);
+					controller.printToPlayer("je hebt nu " + std::to_string(gameController.getPlayer1().getGoudstukken()) + " goudstukken.", gameController.getPlayer1().get_name());
+				}
+				else
+				{
+					gameController.getPlayer2().addGoudStukken(goud);
+					controller.printToPlayer("je hebt nu " + std::to_string(gameController.getPlayer2().getGoudstukken()) + " goudstukken.", gameController.getPlayer2().get_name());
+				}
+			}
+
 			counter++;
 			if (counter == _oproepVolgorde.size()) {
 				counter = 0;

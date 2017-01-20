@@ -22,12 +22,30 @@ void Dief::karakterInfo(Controller & controller, GameController & gcon)
 	{
 		for (std::shared_ptr<IKarakter> k : gcon.getKarakterCards().getDeck())
 		{
-			if (k->getName() != "Dief" || k->getName() != "Moordenaar" || k->getKilled())
+			bool check = true;
+
+			if (k->getName() == "Dief")
+			{
+				check = false;
+			}
+
+			if (k->getName() == "Moordenaar")
+			{
+				check = false;
+			}
+
+			if (k->getKilled())
+			{
+				check = false;
+			}
+
+			if (check)
 			{
 				_names.push_back(k->getName());
 			}
 		}
 	}
+
 
 	for (std::string k : _names)
 	{
@@ -44,6 +62,8 @@ bool Dief::play(int input, Controller & controller, GameController & gcon)
 		controller.printToPlayer("je hebt de " + _names.at(input - 1) + " bestolen", gcon.getCurrentPlayer().get_name());
 		return true;
 	}
+
+	return false;
 }
 
 void Dief::Steal(std::string name, Controller & controller, GameController & gcon)
