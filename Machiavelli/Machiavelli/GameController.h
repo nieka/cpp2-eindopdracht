@@ -20,8 +20,8 @@ public:
 	void HandleGameCommands(ClientCommand command, Controller& controller);
 	void setupGame(Controller& controller);
 	Player& getCurrentPlayer();
-	Player getPlayer1() const;
-	Player getPlayer2() const;
+	Player& getPlayer1();
+	Player& getPlayer2();
 
 
 	void toggleCurrentPlayer();
