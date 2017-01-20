@@ -175,6 +175,7 @@ void RondeController::startRound(Controller & controller, GameController & gameC
 				controller.printLine("de moordenaar heeft " + currentKarakter + " vermoord.");			
 				if (counter == _oproepVolgorde.size()) {
 					counter = 0;
+					resetKarakters(gameController);
 				}
 
 			}
@@ -199,6 +200,7 @@ void RondeController::startRound(Controller & controller, GameController & gameC
 			counter++;
 			if (counter == _oproepVolgorde.size()) {
 				counter = 0;
+				resetKarakters(gameController);
 			}
 		}	
 
@@ -251,4 +253,13 @@ void RondeController::printRoundInfo(Controller & controller, GameController & g
 	{
 		controller.printToPlayer("type 'ability' om je karakter ability te gebruiken", gameController.getCurrentPlayer().get_name());
 	}	
+}
+
+void RondeController::resetKarakters(GameController & gcon)
+{
+	for (std::shared_ptr<IKarakter> k : gcon.getKarakterCards().getDeck())
+	{
+		k->setKilled(false);
+		k->setTarget(false);
+	}
 }
