@@ -17,7 +17,7 @@ public:
 	GameController();
 	~GameController();
 
-	void HandleGameCommands(ClientCommand command, Controller& controller);
+	void HandleGameCommands(const ClientCommand command, Controller& controller);
 	void setupGame(Controller& controller);
 	Player& getCurrentPlayer();
 	Player& getPlayer1();

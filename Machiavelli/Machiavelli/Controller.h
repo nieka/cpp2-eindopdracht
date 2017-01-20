@@ -17,9 +17,9 @@ public:
 	Controller();
 	~Controller();
 
-	void handleCommand(ClientCommand command);
-	void printLine(const std::string value) const;
-	void printToPlayer(const std::string value, const std::string playerName) const;
+	void handleCommand(const ClientCommand command);
+	void printLine(std::string value) const;
+	void printToPlayer(std::string value, std::string playerName) const;
 	void stop();
 	std::vector<Player> getPlayers() const;
 private:
@@ -33,6 +33,6 @@ private:
 	GameController _gameController;
 	const std::string _cardPath = "Bouwkaarten.csv";
 	const std::string _karakterPath = "karakterkaarten.csv";
-	bool checkSocket(ClientInfo* ci);
+	bool checkSocket(ClientInfo* ci) const;
 };
 

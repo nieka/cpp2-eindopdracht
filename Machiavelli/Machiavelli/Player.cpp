@@ -118,7 +118,7 @@ void Player::verwijderGebouw(int id)
 	_gebouwdeKaarten.erase(_gebouwdeKaarten.begin() + id);
 }
 
-const bool Player::hasKarakterKaart(const std::string name)
+const bool Player::hasKarakterKaart(std::string name)
 {
 	bool hasCard = false;
 	std::for_each(_karakterKaarten.begin(), _karakterKaarten.end(), [&](std::shared_ptr<IKarakter> card) { if (card->getName() == name) {

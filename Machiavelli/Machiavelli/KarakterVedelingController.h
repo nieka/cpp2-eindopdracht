@@ -15,7 +15,7 @@ public:
 	KarakterVedelingController();
 	~KarakterVedelingController();
 
-	void HandleGameCommands(ClientCommand command, Controller& controller, GameController& gameController, Deck<std::shared_ptr<IKarakter>>& karakterDeck);
+	void HandleGameCommands(const ClientCommand command, Controller& controller, GameController& gameController, Deck<std::shared_ptr<IKarakter>>& karakterDeck);
 	void start(Controller& controller, GameController& gameController, Deck<std::shared_ptr<IKarakter>>& karakterDeck);
 private :
 	int step;

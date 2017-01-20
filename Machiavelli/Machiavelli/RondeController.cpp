@@ -20,7 +20,7 @@ RondeController::~RondeController()
 {
 }
 
-void RondeController::HandleGameCommands(ClientCommand command, Controller & controller, GameController & gameController, Deck<std::shared_ptr<Card>> cardDeck)
+void RondeController::HandleGameCommands(const ClientCommand command, Controller & controller, GameController & gameController, Deck<std::shared_ptr<Card>> cardDeck)
 {	
 	if (command.get_cmd() == "ability" && !abilityUsed && _roundType != RoundType::ABILITY)
 	{
@@ -209,7 +209,6 @@ void RondeController::startRound(Controller & controller, GameController & gameC
 				gotReward = false;
 				abilityUsed = false;
 				_firstTomaxBuildings = false;
-				_oproepVolgorde = { "Moordenaar", "Dief", "Magier", "Koning","Prediker","Koopman","Bouwmeester","Condottiere" };
 				currentKarakter = _oproepVolgorde.at(0);
 				resetKarakters(gameController);
 				gameController.setState(KARAKTERVERDELING);

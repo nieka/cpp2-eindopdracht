@@ -14,7 +14,7 @@ class RondeController
 public:
 	RondeController();
 	~RondeController();
-	void HandleGameCommands(ClientCommand command, Controller& controller, GameController& gameController, Deck<std::shared_ptr<Card>> cardDeck);
+	void HandleGameCommands(const ClientCommand command, Controller& controller, GameController& gameController, Deck<std::shared_ptr<Card>> cardDeck);
 
 	void startRound(Controller& controller, GameController& gameController, Deck<std::shared_ptr<Card>> cardDeck);
 

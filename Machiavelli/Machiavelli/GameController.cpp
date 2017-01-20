@@ -12,7 +12,7 @@ GameController::~GameController()
 {
 }
 
-void GameController::HandleGameCommands(ClientCommand command, Controller& controller)
+void GameController::HandleGameCommands(const ClientCommand command, Controller& controller)
 {
 	if (auto clientInfo = command.get_client_info().lock()) {
 		if (clientInfo->get_player().get_name() != _currectPlayer.get_name()) {

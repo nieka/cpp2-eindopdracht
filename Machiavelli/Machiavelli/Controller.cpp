@@ -12,7 +12,7 @@ Controller::~Controller()
 {
 }
 
-void Controller::handleCommand(ClientCommand command)
+void Controller::handleCommand(const ClientCommand command)
 {
 	if (auto clientInfo = command.get_client_info().lock()) {
 		if (!started) {
@@ -57,7 +57,7 @@ void Controller::handleCommand(ClientCommand command)
 	}
 }
 
-void Controller::printLine(const std::string value) const
+void Controller::printLine(std::string value) const
 {
 	
 	for (auto const& player : playerSockets) {
@@ -65,7 +65,7 @@ void Controller::printLine(const std::string value) const
 	}
 }
 
-void Controller::printToPlayer(const std::string value, const std::string playerName) const
+void Controller::printToPlayer(std::string value, std::string playerName) const
 {
 	playerSockets.at(playerName)->get_socket().write(value + "\r\n");
 }
@@ -81,7 +81,7 @@ std::vector<Player> Controller::getPlayers() const
 	return players;
 }
 
-bool Controller::checkSocket(ClientInfo* ci)
+bool Controller::checkSocket(ClientInfo* ci) const
 {
 	for (auto socket : playerSockets)
 	{

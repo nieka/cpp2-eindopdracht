@@ -13,7 +13,7 @@ KarakterVedelingController::~KarakterVedelingController()
 {
 }
 
-void KarakterVedelingController::HandleGameCommands(ClientCommand command, Controller& controller,GameController& gameController, Deck<std::shared_ptr<IKarakter>>& karakterDeck)
+void KarakterVedelingController::HandleGameCommands(const ClientCommand command, Controller& controller,GameController& gameController, Deck<std::shared_ptr<IKarakter>>& karakterDeck)
 {
 	if (command.get_cmd() == "cheat")
 	{
