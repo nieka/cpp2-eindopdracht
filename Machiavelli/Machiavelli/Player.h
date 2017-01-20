@@ -56,7 +56,7 @@ private:
 	std::vector<std::shared_ptr<IKarakter>> _karakterKaarten;
 	std::vector<std::shared_ptr<Card>> _gebouwdeKaarten;
 	bool _koning = false;
-	bool _firstTomaxBuildings;
+	bool _firstTomaxBuildings = false;
 };
 
 #endif /* Player_hpp */

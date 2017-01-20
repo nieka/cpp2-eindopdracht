@@ -31,5 +31,6 @@ private:
 	bool _firstTomaxBuildings;
 	std::string currentKarakter = "";
 	const int BUILDINGSNEEDEDTOWIN = 8;
+	int _gebouwdeGebouwen = 0;
 };
 

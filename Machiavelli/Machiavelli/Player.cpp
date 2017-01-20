@@ -110,6 +110,7 @@ void Player::bouwGebouw(std::shared_ptr<Card> card)
 {
 	_bouwKaarten.erase(std::remove(_bouwKaarten.begin(), _bouwKaarten.end(), card), _bouwKaarten.end());
 	_gebouwdeKaarten.push_back(card);
+	_goudstukken -= card->getWaarde();
 }
 
 const bool Player::hasKarakterKaart(const std::string name)

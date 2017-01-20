@@ -22,7 +22,7 @@ public:
 	Player& getCurrentPlayer();
 	Player& getPlayer1();
 	Player& getPlayer2();
-
+	Deck<std::shared_ptr<Card>>& getBouwKaarten();
 
 	void toggleCurrentPlayer();
 	Deck<std::shared_ptr<IKarakter>> getKarakterCards() const;
