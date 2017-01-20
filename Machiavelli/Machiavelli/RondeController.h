@@ -32,5 +32,6 @@ private:
 	std::string currentKarakter = "";
 	const int BUILDINGSNEEDEDTOWIN = 8;
 	void resetKarakters(GameController & gcon);
+	int _gebouwdeGebouwen = 0;
 };
 

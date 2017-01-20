@@ -39,7 +39,6 @@ void RondeController::HandleGameCommands(ClientCommand command, Controller & con
 				controller.printToPlayer("je hebt 2 goudstukken erbij gekregen", gameController.getCurrentPlayer().get_name());
 				controller.printToPlayer("je hebt nu " + std::to_string(gameController.getCurrentPlayer().getGoudstukken()) + " goudstukken", gameController.getCurrentPlayer().get_name());
 				gotReward = true;
-				printRoundInfo(controller, gameController);
 				_lastType = CHOOSING;
 				_roundType = BUILD;
 				break;
@@ -47,7 +46,6 @@ void RondeController::HandleGameCommands(ClientCommand command, Controller & con
 				controller.printToPlayer("Kies 1 van de volgende kaarten om in je hand te nemen. De andere word op de afleg stapel gelegd.", gameController.getCurrentPlayer().get_name());
 				//bouwkaarten gedeelte
 				gotReward = true;
-				printRoundInfo(controller, gameController);
 				_lastType = CHOOSING;
 				_roundType = GETBUILDCARD;
 				for (int i = 0; i < 2; ++i) {
@@ -90,8 +88,17 @@ void RondeController::HandleGameCommands(ClientCommand command, Controller & con
 					gameController.getCurrentPlayer().bouwGebouw(bouwkaart);
 					if (gameController.getCurrentPlayer().getGebouwdeKaarten().size() == BUILDINGSNEEDEDTOWIN && !_firstTomaxBuildings) {
 						_firstTomaxBuildings = true;
+						gameController.getCurrentPlayer().setFirstToMaxBuildeings();
 					}
-					_roundType = END;
+					if (currentKarakter == "Bouwmeester" && _gebouwdeGebouwen <= 3) {
+						_gebouwdeGebouwen++;
+						controller.printToPlayer("Omdat je een bouwmeester bent mag je nog een gebouw bouwen", gameController.getCurrentPlayer().get_name());
+
+					}
+					else {
+						_roundType = END;
+						_gebouwdeGebouwen = 0;
+					}					
 				}
 				else {
 					controller.printToPlayer("Je hebt niet genoeg goudstukken om het gebouw te bouwen", gameController.getCurrentPlayer().get_name());
@@ -147,9 +154,6 @@ void RondeController::startRound(Controller & controller, GameController & gameC
 		bool playerHasCard = false;		
 		while (!playerHasCard) {
 			currentKarakter = _oproepVolgorde.at(counter);
-
-			
-
 			
 			controller.printLine("De koning roeps de " + currentKarakter + " op!");
 			//check if player 1 or two has the card
@@ -168,14 +172,12 @@ void RondeController::startRound(Controller & controller, GameController & gameC
 
 			if (gameController.getKarakterByName(currentKarakter).getKilled())
 			{
-				controller.printLine("de moordenaar heeft " + currentKarakter + " vermoord.");
-				++counter;
+				controller.printLine("de moordenaar heeft " + currentKarakter + " vermoord.");			
 				if (counter == _oproepVolgorde.size()) {
 					counter = 0;
 					resetKarakters(gameController);
 				}
 
-				startRound(controller, gameController, cardDeck);
 			}
 			else if (gameController.getKarakterByName(currentKarakter).getTarget())
 			{
@@ -250,13 +252,7 @@ void RondeController::printRoundInfo(Controller & controller, GameController & g
 	if (!abilityUsed && _roundType != RoundType::ABILITY)
 	{
 		controller.printToPlayer("type 'ability' om je karakter ability te gebruiken", gameController.getCurrentPlayer().get_name());
-	}
-
-	if (gotReward)
-	{
-		controller.printToPlayer("type 'end' om de buurt te eindigen.", gameController.getCurrentPlayer().get_name());
-	}
-	
+	}	
 }
 
 void RondeController::resetKarakters(GameController & gcon)

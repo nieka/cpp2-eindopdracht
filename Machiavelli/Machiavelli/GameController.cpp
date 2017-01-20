@@ -108,6 +108,11 @@ Player& GameController::getPlayer2()
 	return _player2;
 }
 
+Deck<std::shared_ptr<Card>>& GameController::getBouwKaarten()
+{
+	return _cardDeck;
+}
+
 void GameController::toggleCurrentPlayer()
 {
 	if (_currectPlayer.get_name() == _player1.get_name()) {
