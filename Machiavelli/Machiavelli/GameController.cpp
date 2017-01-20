@@ -93,7 +93,7 @@ void GameController::setupGame(Controller& controller)
 	}
 }
 
-Player GameController::getPlayer1() const
+Player& GameController::getPlayer1()
 {
 	return _player1;
 }
@@ -103,7 +103,7 @@ Player & GameController::getCurrentPlayer()
 	return _currectPlayer;
 }
 
-Player GameController::getPlayer2() const
+Player& GameController::getPlayer2()
 {
 	return _player2;
 }
