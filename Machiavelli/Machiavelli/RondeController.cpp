@@ -138,8 +138,10 @@ void RondeController::HandleGameCommands(ClientCommand command, Controller & con
 			break;
 		}
 	}
-
-	printRoundInfo(controller, gameController);
+	if (inRound) {
+		printRoundInfo(controller, gameController);
+	}
+	
 }
 
 void RondeController::startRound(Controller & controller, GameController & gameController, Deck<std::shared_ptr<Card>> cardDeck)
@@ -199,8 +201,20 @@ void RondeController::startRound(Controller & controller, GameController & gameC
 
 			counter++;
 			if (counter == _oproepVolgorde.size()) {
+				controller.printLine("----------------------Ronde afgelopen----------------------");
+				//we zijn klaar met iedereen oproepen dus we beginnen weer met het verdelen van de kaarten
 				counter = 0;
+				_roundType = CHOOSING;
+				inRound = false;
+				gotReward = false;
+				abilityUsed = false;
+				_firstTomaxBuildings = false;
+				_oproepVolgorde = { "Moordenaar", "Dief", "Magier", "Koning","Prediker","Koopman","Bouwmeester","Condottiere" };
+				currentKarakter = _oproepVolgorde.at(0);
 				resetKarakters(gameController);
+				gameController.setState(KARAKTERVERDELING);
+				gameController.resetRound(controller);
+				return;
 			}
 		}	
 

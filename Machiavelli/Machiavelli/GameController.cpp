@@ -74,18 +74,10 @@ void GameController::setupGame(Controller& controller)
 			_player2.AddBouwCard(_cardDeck.drawCard());
 		}
 
-		controller.printLine(_player1.get_name() + " is de koning en mag beginnen.");
-
 		_currentState = GameStates::KARAKTERVERDELING;
 		_currectPlayer = _player1;
 
-		_kaartenOpTafel.push_back(_karakterDeck.drawCard());
-		controller.printToPlayer("Het karakter: " + _kaartenOpTafel.at(0)->getName() + " is omgekerd op tafel gelegd!", _currectPlayer.get_name());
-		controller.printToPlayer("Kies een van de karakters voor in je hand:", _currectPlayer.get_name());
-
-		for (int i = 0; i < _karakterDeck.getDeck().size(); ++i) {
-			controller.printToPlayer(std::to_string(i + 1) + ": " + _karakterDeck.getDeck().at(i)->getName(), _currectPlayer.get_name());
-		}
+		_karakterVerdelingController.start(controller, *this, _karakterDeck);
 	}
 	else
 	{
@@ -167,6 +159,15 @@ void GameController::endGame(Controller& controller)
 	controller.stop();
 
 
+}
+
+void GameController::resetRound(Controller& controller)
+{
+	if (!_currectPlayer.isKoning()) {
+		toggleCurrentPlayer();
+	}
+
+	_karakterVerdelingController.start(controller, *this,_karakterDeck);
 }
 
 

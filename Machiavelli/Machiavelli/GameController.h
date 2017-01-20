@@ -31,6 +31,7 @@ public:
 	void setState(const GameStates state);
 
 	void endGame(Controller& controller);
+	void resetRound(Controller& controller);
 
 private:
 	bool createCardDeck(Controller& con);

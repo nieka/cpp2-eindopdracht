@@ -15,24 +15,15 @@ KarakterVedelingController::~KarakterVedelingController()
 
 void KarakterVedelingController::HandleGameCommands(ClientCommand command, Controller& controller,GameController& gameController, Deck<std::shared_ptr<IKarakter>>& karakterDeck)
 {
-	//zorgt ervoor dat het deck voor de eerste keer wordt aangemaakt.
-	if (!deck)
-	{
-		cards = { karakterDeck.getDeck() };
-		deck = true;
-	}
-
 	if (command.get_cmd() == "cheat")
 	{
-		if (karakterDeck.getDeck().size() == 7)
+		if (karakterDeck.getDeck().size() == 8)
 		{
 			skipPhase(controller, gameController, karakterDeck);
 		}
 	}
 	else
-	{
-		
-
+	{	
 		int number = std::stoi(command.get_cmd());
 		if (number >= 1 && number <= cards.size()) {
 			std::shared_ptr<IKarakter> card = std::move(cards.at(number - 1));
@@ -75,6 +66,28 @@ void KarakterVedelingController::HandleGameCommands(ClientCommand command, Contr
 	
 }
 
+void KarakterVedelingController::start(Controller & controller, GameController & gameController, Deck<std::shared_ptr<IKarakter>>& karakterDeck)
+{
+	//zorgt ervoor dat het deck voor de eerste keer wordt aangemaakt.
+	cards = { karakterDeck.getDeck() };
+	deck = true;
+
+	std::shared_ptr<IKarakter> card = std::move(cards.at(cards.size() - 1));
+
+	cards.erase(cards.end() - 1);
+
+	controller.printLine(gameController.getCurrentPlayer().get_name() + " is de koning en mag beginnen.");
+
+
+	gameController.legKaartOpTafel(card);
+	controller.printToPlayer("Het karakter: " + card->getName() + " is omgekerd op tafel gelegd!", gameController.getCurrentPlayer().get_name());
+	controller.printToPlayer("Kies een van de karakters voor in je hand:", gameController.getCurrentPlayer().get_name());
+
+	for (int i = 0; i < cards.size(); ++i) {
+		controller.printToPlayer(std::to_string(i + 1) + ": " + cards.at(i)->getName(), gameController.getCurrentPlayer().get_name());
+	}
+}
+
 void KarakterVedelingController::skipPhase(Controller& controller, GameController& gameController, Deck<std::shared_ptr<IKarakter>>& karakterDeck)
 {
 	//need random seed
@@ -105,6 +118,6 @@ void KarakterVedelingController::skipPhase(Controller& controller, GameControlle
 	}
 
 	//we zijn klaar met deze state
-	controller.printLine("Het karakter verdelen is klaar!");
+	controller.printLine("----------------------Het karakter verdelen is klaar!----------------------");
 	gameController.setState(GameStates::RONDEN);
 }
