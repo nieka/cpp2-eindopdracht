@@ -172,6 +172,7 @@ void RondeController::startRound(Controller & controller, GameController & gameC
 				++counter;
 				if (counter == _oproepVolgorde.size()) {
 					counter = 0;
+					resetKarakters(gameController);
 				}
 
 				startRound(controller, gameController, cardDeck);
@@ -197,6 +198,7 @@ void RondeController::startRound(Controller & controller, GameController & gameC
 			counter++;
 			if (counter == _oproepVolgorde.size()) {
 				counter = 0;
+				resetKarakters(gameController);
 			}
 		}	
 
@@ -255,4 +257,13 @@ void RondeController::printRoundInfo(Controller & controller, GameController & g
 		controller.printToPlayer("type 'end' om de buurt te eindigen.", gameController.getCurrentPlayer().get_name());
 	}
 	
+}
+
+void RondeController::resetKarakters(GameController & gcon)
+{
+	for (std::shared_ptr<IKarakter> k : gcon.getKarakterCards().getDeck())
+	{
+		k->setKilled(false);
+		k->setTarget(false);
+	}
 }
