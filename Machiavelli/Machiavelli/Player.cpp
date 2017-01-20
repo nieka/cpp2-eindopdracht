@@ -113,6 +113,11 @@ void Player::bouwGebouw(std::shared_ptr<Card> card)
 	_goudstukken -= card->getWaarde();
 }
 
+void Player::verwijderGebouw(int id)
+{
+	_gebouwdeKaarten.erase(_gebouwdeKaarten.begin() + id);
+}
+
 const bool Player::hasKarakterKaart(const std::string name)
 {
 	bool hasCard = false;
@@ -129,7 +134,7 @@ std::vector<std::shared_ptr<Card>> Player::getBouwKaarten() const
 	return _bouwKaarten;
 }
 
-std::vector<std::shared_ptr<Card>> Player::getGebouwdeKaarten() const
+std::vector<std::shared_ptr<Card>> & Player::getGebouwdeKaarten()
 {
 	return _gebouwdeKaarten;
 }
