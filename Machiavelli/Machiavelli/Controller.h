@@ -20,7 +20,6 @@ public:
 	void handleCommand(ClientCommand command);
 	void printLine(const std::string value) const;
 	void printToPlayer(const std::string value, const std::string playerName) const;
-	std::string readLineOfPlayer(const std::string playerName) const;
 	void stop();
 	std::vector<Player> getPlayers() const;
 private:
