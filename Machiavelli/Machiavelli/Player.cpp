@@ -96,6 +96,11 @@ void Player::setFirstToMaxBuildeings()
 	_firstTomaxBuildings = true;
 }
 
+void Player::resetRound()
+{
+	_karakterKaarten.clear();
+}
+
 void Player::AddBouwCard(std::shared_ptr<Card> card)
 {
 	_bouwKaarten.push_back(card);

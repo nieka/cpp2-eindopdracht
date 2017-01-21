@@ -39,7 +39,7 @@ public:
 
 	int calculateScore();
 	void setFirstToMaxBuildeings();
-
+	void resetRound();
 
 	void AddBouwCard(std::shared_ptr<Card> card);
 	void AddKarakterKaart(std::shared_ptr<IKarakter> card);

@@ -166,7 +166,9 @@ void GameController::resetRound(Controller& controller)
 	if (!_currectPlayer.isKoning()) {
 		toggleCurrentPlayer();
 	}
-
+	_player1.resetRound();
+	_player2.resetRound();
+	_currectPlayer.resetRound();
 	_karakterVerdelingController.start(controller, *this,_karakterDeck);
 }
 
