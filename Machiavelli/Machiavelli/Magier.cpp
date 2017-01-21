@@ -40,7 +40,57 @@ bool Magier::play(int input, Controller & controller, GameController & gcon)
 	}
 	else
 	{
+		std::vector<std::shared_ptr<Card>> Cards = gcon.getCurrentPlayer().getBouwKaarten();
+		std::vector<int> numbers;
+		std::string in = std::to_string(input);
+		int counter = 0;
+
+		for (char a : in)
+		{
+			std::string b(1, a);
+			int result = std::stoi(b);
+
+			if (checknumber(numbers, result))
+			{
+				try
+				{
+					std::shared_ptr<Card> b{ Cards.at(result - 1) };
+					gcon.getCurrentPlayer().verwijderGebouwkaart(b);
+				}
+				catch (...)
+				{
+					controller.printToPlayer("voor een id in van een kaart", gcon.getCurrentPlayer().get_name());
+					return false;
+				}
+
+				numbers.push_back(result);
+				counter++;
+			}
+			
+			
+		}
+
+		for (int i = 0; i < counter; ++i)
+		{
+			std::shared_ptr<Card> newcard = gcon.getBouwKaarten().drawCard();
+			controller.printToPlayer("de bouwkaart " + newcard->getName() + " " + newcard->getColor() + " is toegevoegd aan je hand.", gcon.getCurrentPlayer().get_name());
+			gcon.getCurrentPlayer().AddBouwCard(std::move(newcard));
+		}
+
 		return true;
 	}
 		
+}
+
+bool Magier::checknumber(std::vector<int> numbers, int n)
+{
+	for (int i : numbers)
+	{
+		if (i == n)
+		{
+			return false;
+		}
+	}
+
+	return true;
 }

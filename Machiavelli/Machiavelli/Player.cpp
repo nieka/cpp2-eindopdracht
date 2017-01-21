@@ -118,6 +118,11 @@ void Player::verwijderGebouw(int id)
 	_gebouwdeKaarten.erase(_gebouwdeKaarten.begin() + id);
 }
 
+void Player::verwijderGebouwkaart(std::shared_ptr<Card> card)
+{
+	_bouwKaarten.erase(std::remove(_bouwKaarten.begin(), _bouwKaarten.end(), card), _bouwKaarten.end());
+}
+
 const bool Player::hasKarakterKaart(std::string name)
 {
 	bool hasCard = false;

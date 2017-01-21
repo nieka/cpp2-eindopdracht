@@ -45,6 +45,7 @@ public:
 	void AddKarakterKaart(std::shared_ptr<IKarakter> card);
 	void bouwGebouw(std::shared_ptr<Card> card);
 	void verwijderGebouw(int id);
+	void verwijderGebouwkaart(std::shared_ptr<Card> card);
 	const bool hasKarakterKaart(std::string name);
 	std::vector<std::shared_ptr<Card>> getBouwKaarten() const;
 	std::vector<std::shared_ptr<Card>> & getGebouwdeKaarten();
