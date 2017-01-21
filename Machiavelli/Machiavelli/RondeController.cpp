@@ -82,7 +82,7 @@ void RondeController::HandleGameCommands(const ClientCommand command, Controller
 				break;
 			}
 			int buildNumber = std::stoi(command.get_cmd());
-			if (buildNumber > 0 && buildNumber < gameController.getCurrentPlayer().getBouwKaarten().size()) {
+			if (buildNumber > 0 && buildNumber <= gameController.getCurrentPlayer().getBouwKaarten().size()) {
 				std::shared_ptr<Card> bouwkaart = gameController.getCurrentPlayer().getBouwKaarten().at(buildNumber - 1);
 				if (bouwkaart->getWaarde() <= gameController.getCurrentPlayer().getGoudstukken()) {
 					gameController.getCurrentPlayer().bouwGebouw(bouwkaart);
@@ -174,10 +174,12 @@ void RondeController::startRound(Controller & controller, GameController & gameC
 
 			if (gameController.getKarakterByName(currentKarakter).getKilled())
 			{
-				controller.printLine("de moordenaar heeft " + currentKarakter + " vermoord.");			
-				if (counter == _oproepVolgorde.size()) {
-					counter = 0;
-					resetKarakters(gameController);
+				controller.printLine("de moordenaar heeft " + currentKarakter + " vermoord.");
+				counter++;
+				startRound(controller, gameController, cardDeck);
+				if (counter >= _oproepVolgorde.size()) {
+					endOfRound(controller, gameController);
+					return;
 				}
 
 			}
@@ -200,19 +202,8 @@ void RondeController::startRound(Controller & controller, GameController & gameC
 			}
 
 			counter++;
-			if (counter == _oproepVolgorde.size()) {
-				controller.printLine("----------------------Ronde afgelopen----------------------");
-				//we zijn klaar met iedereen oproepen dus we beginnen weer met het verdelen van de kaarten
-				counter = 0;
-				_roundType = CHOOSING;
-				inRound = false;
-				gotReward = false;
-				abilityUsed = false;
-				_firstTomaxBuildings = false;
-				currentKarakter = _oproepVolgorde.at(0);
-				resetKarakters(gameController);
-				gameController.setState(KARAKTERVERDELING);
-				gameController.resetRound(controller);
+			if (counter >= _oproepVolgorde.size()) {
+				endOfRound(controller, gameController);
 				return;
 			}
 		}	
@@ -275,4 +266,20 @@ void RondeController::resetKarakters(GameController & gcon)
 		k->setKilled(false);
 		k->setTarget(false);
 	}
+}
+
+void RondeController::endOfRound(Controller & controller, GameController & gameController)
+{	
+	controller.printLine("----------------------Ronde afgelopen----------------------");
+	//we zijn klaar met iedereen oproepen dus we beginnen weer met het verdelen van de kaarten
+	counter = 0;
+	_roundType = CHOOSING;
+	inRound = false;
+	gotReward = false;
+	abilityUsed = false;
+	_firstTomaxBuildings = false;
+	currentKarakter = _oproepVolgorde.at(0);
+	resetKarakters(gameController);
+	gameController.setState(KARAKTERVERDELING);
+	gameController.resetRound(controller);
 }
