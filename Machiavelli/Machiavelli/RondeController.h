@@ -34,5 +34,8 @@ private:
 	void resetKarakters(GameController & gcon);
 	int _gebouwdeGebouwen = 0;
 	void endOfRound(Controller & controller, GameController & gameController);
+	void printstats(Controller & controller, GameController & gameController);
+	void printkarakter(Controller & controller, GameController & gameController);
+	void printplayers(Controller & controller, GameController & gameController);
 };
 

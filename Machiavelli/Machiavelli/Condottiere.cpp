@@ -14,7 +14,8 @@ Condottiere::~Condottiere()
 
 void Condottiere::karakterInfo(Controller & controller, GameController & gcon)
 {
-	controller.printToPlayer("Welk gebouw van de tegenstander wil je weghalen", gcon.getCurrentPlayer().get_name());
+	controller.printToPlayer("Type het id van het gebouw, om het gebouw we te halen bij je tegenstander.", gcon.getCurrentPlayer().get_name());
+	controller.printToPlayer("Type '100' om de ability te stoppen (dit kost je wel je ability voor deze ronde).", gcon.getCurrentPlayer().get_name());
 	int counter = 1;
 
 	if (gcon.getPlayer1().get_name() == gcon.getCurrentPlayer().get_name())
@@ -39,42 +40,50 @@ void Condottiere::karakterInfo(Controller & controller, GameController & gcon)
 
 bool Condottiere::play(int input, Controller & controller, GameController & gcon)
 {
-	if (gcon.getPlayer1().get_name() == gcon.getCurrentPlayer().get_name())
+	if (input == 100)
 	{
-		if (input > 0 && input <= gcon.getPlayer2().getGebouwdeKaarten().size())
-		{
-			if (gcon.getPlayer2().getGebouwdeKaarten().at(input - 1)->getWaarde() < 2 || gcon.getCurrentPlayer().getGoudstukken() >= gcon.getPlayer2().getGebouwdeKaarten().at(input - 1)->getWaarde() - 1)
-			{
-				controller.printToPlayer("je hebt de " + gcon.getPlayer2().getGebouwdeKaarten().at(input - 1)->getName() + " verwijderd.", gcon.getCurrentPlayer().get_name());
-				gcon.getCurrentPlayer().setGoudStukkken(gcon.getCurrentPlayer().getGoudstukken() - gcon.getPlayer2().getGebouwdeKaarten().at(input - 1)->getWaarde() - 1);
-				gcon.getPlayer2().verwijderGebouw(input - 1);
-				return true;
-			}
-			else
-			{
-				controller.printToPlayer("je hebt niet genoeg goudstukken om dit gebouw te verwijderen", gcon.getCurrentPlayer().get_name());
-			}
-			
-		}
+		return true;
 	}
 	else
 	{
-		if (input > 0 && input <= gcon.getPlayer1().getGebouwdeKaarten().size())
+		if (gcon.getPlayer1().get_name() == gcon.getCurrentPlayer().get_name())
 		{
-			if (gcon.getPlayer1().getGebouwdeKaarten().at(input - 1)->getWaarde() < 2 || gcon.getCurrentPlayer().getGoudstukken() >= gcon.getPlayer1().getGebouwdeKaarten().at(input - 1)->getWaarde() - 1)
+			if (input > 0 && input <= gcon.getPlayer2().getGebouwdeKaarten().size())
 			{
-				controller.printToPlayer("je hebt de " + gcon.getPlayer1().getGebouwdeKaarten().at(input - 1)->getName() + " verwijderd.", gcon.getCurrentPlayer().get_name());
-				gcon.getCurrentPlayer().setGoudStukkken(gcon.getCurrentPlayer().getGoudstukken() - gcon.getPlayer1().getGebouwdeKaarten().at(input - 1)->getWaarde() - 1);
-				gcon.getPlayer1().verwijderGebouw(input - 1);
+				if (gcon.getPlayer2().getGebouwdeKaarten().at(input - 1)->getWaarde() < 2 || gcon.getCurrentPlayer().getGoudstukken() >= gcon.getPlayer2().getGebouwdeKaarten().at(input - 1)->getWaarde() - 1)
+				{
+					controller.printToPlayer("je hebt de " + gcon.getPlayer2().getGebouwdeKaarten().at(input - 1)->getName() + " verwijderd.", gcon.getCurrentPlayer().get_name());
+					gcon.getCurrentPlayer().setGoudStukkken(gcon.getCurrentPlayer().getGoudstukken() - gcon.getPlayer2().getGebouwdeKaarten().at(input - 1)->getWaarde() - 1);
+					gcon.getPlayer2().verwijderGebouw(input - 1);
+					return true;
+				}
+				else
+				{
+					controller.printToPlayer("je hebt niet genoeg goudstukken om dit gebouw te verwijderen", gcon.getCurrentPlayer().get_name());
+				}
 
-				return true;
 			}
-			else
+		}
+		else
+		{
+			if (input > 0 && input <= gcon.getPlayer1().getGebouwdeKaarten().size())
 			{
-				controller.printToPlayer("je hebt niet genoeg goudstukken om dit gebouw te verwijderen", gcon.getCurrentPlayer().get_name());
+				if (gcon.getPlayer1().getGebouwdeKaarten().at(input - 1)->getWaarde() < 2 || gcon.getCurrentPlayer().getGoudstukken() >= gcon.getPlayer1().getGebouwdeKaarten().at(input - 1)->getWaarde() - 1)
+				{
+					controller.printToPlayer("je hebt de " + gcon.getPlayer1().getGebouwdeKaarten().at(input - 1)->getName() + " verwijderd.", gcon.getCurrentPlayer().get_name());
+					gcon.getCurrentPlayer().setGoudStukkken(gcon.getCurrentPlayer().getGoudstukken() - gcon.getPlayer1().getGebouwdeKaarten().at(input - 1)->getWaarde() - 1);
+					gcon.getPlayer1().verwijderGebouw(input - 1);
+
+					return true;
+				}
+				else
+				{
+					controller.printToPlayer("je hebt niet genoeg goudstukken om dit gebouw te verwijderen", gcon.getCurrentPlayer().get_name());
+				}
 			}
 		}
 	}
+	
 	
 	return false;
 }

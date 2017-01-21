@@ -27,6 +27,18 @@ void RondeController::HandleGameCommands(const ClientCommand command, Controller
 		_lastType = _roundType;
 		_roundType = ABILITY;
 	}
+	else if (command.get_cmd() == "stats")
+	{
+		printstats(controller, gameController);
+	}
+	else if (command.get_cmd() == "karakter")
+	{
+		printkarakter(controller, gameController);
+	}
+	else if (command.get_cmd() == "players")
+	{
+		printplayers(controller, gameController);
+	}
 	else
 	{
 		switch (_roundType)
@@ -282,4 +294,81 @@ void RondeController::endOfRound(Controller & controller, GameController & gameC
 	resetKarakters(gameController);
 	gameController.setState(KARAKTERVERDELING);
 	gameController.resetRound(controller);
+}
+
+void RondeController::printstats(Controller & controller, GameController & gameController)
+{
+	controller.printToPlayer("=== stats ===", gameController.getCurrentPlayer().get_name());
+
+	controller.printToPlayer("goudstukken: " + std::to_string(gameController.getCurrentPlayer().getGoudstukken()), gameController.getCurrentPlayer().get_name());
+	controller.printToPlayer("== Gebouw kaarten ==", gameController.getCurrentPlayer().get_name());
+
+	for (std::shared_ptr<Card> k : gameController.getCurrentPlayer().getBouwKaarten())
+	{
+		controller.printToPlayer(k->getName() + " " + k->getColor() + " " + std::to_string(k->getWaarde()), gameController.getCurrentPlayer().get_name());
+	}
+
+	controller.printToPlayer("== gebouwde gebouwen", gameController.getCurrentPlayer().get_name());
+
+	for (std::shared_ptr<Card> p : gameController.getCurrentPlayer().getGebouwdeKaarten())
+	{
+		controller.printToPlayer(p->getName() + " " + p->getColor() + " " + std::to_string(p->getWaarde()), gameController.getCurrentPlayer().get_name());
+	}
+
+	controller.printToPlayer("=============", gameController.getCurrentPlayer().get_name());
+}
+
+void RondeController::printkarakter(Controller & controller, GameController & gameController)
+{
+	controller.printToPlayer("=== karakters, killed, target ===", gameController.getCurrentPlayer().get_name());
+
+	for (std::string name : _oproepVolgorde)
+	{
+		controller.printToPlayer(gameController.getKarakterByName(name).getName() + " " + std::to_string(gameController.getKarakterByName(name).getKilled()) + " " + std::to_string(gameController.getKarakterByName(name).getTarget()), gameController.getCurrentPlayer().get_name());
+	}
+
+	controller.printToPlayer("=================================", gameController.getCurrentPlayer().get_name());
+}
+
+void RondeController::printplayers(Controller & controller, GameController & gameController)
+{
+	//note kijkt niet naar current player.
+
+	controller.printToPlayer("=== player 1 stats ===", gameController.getCurrentPlayer().get_name());
+	controller.printToPlayer("naam: " + gameController.getPlayer1().get_name(), gameController.getCurrentPlayer().get_name());
+	controller.printToPlayer("goudstukken: " + std::to_string(gameController.getPlayer1().getGoudstukken()), gameController.getCurrentPlayer().get_name());
+	controller.printToPlayer("== Gebouw kaarten ==", gameController.getCurrentPlayer().get_name());
+
+	for (std::shared_ptr<Card> k : gameController.getPlayer1().getBouwKaarten())
+	{
+		controller.printToPlayer(k->getName() + " " + k->getColor() + " " + std::to_string(k->getWaarde()), gameController.getCurrentPlayer().get_name());
+	}
+
+	controller.printToPlayer("== gebouwde gebouwen", gameController.getCurrentPlayer().get_name());
+
+	for (std::shared_ptr<Card> p : gameController.getPlayer1().getGebouwdeKaarten())
+	{
+		controller.printToPlayer(p->getName() + " " + p->getColor() + " " + std::to_string(p->getWaarde()), gameController.getCurrentPlayer().get_name());
+	}
+
+	controller.printToPlayer("=============", gameController.getCurrentPlayer().get_name());
+	controller.printToPlayer("", gameController.getCurrentPlayer().get_name());
+	controller.printToPlayer("=== player 2 stats ===", gameController.getCurrentPlayer().get_name());
+	controller.printToPlayer("naam: " + gameController.getPlayer2().get_name(), gameController.getCurrentPlayer().get_name());
+	controller.printToPlayer("goudstukken: " + std::to_string(gameController.getPlayer2().getGoudstukken()), gameController.getCurrentPlayer().get_name());
+	controller.printToPlayer("== Gebouw kaarten ==", gameController.getCurrentPlayer().get_name());
+
+	for (std::shared_ptr<Card> k : gameController.getPlayer2().getBouwKaarten())
+	{
+		controller.printToPlayer(k->getName() + " " + k->getColor() + " " + std::to_string(k->getWaarde()), gameController.getCurrentPlayer().get_name());
+	}
+
+	controller.printToPlayer("== gebouwde gebouwen", gameController.getCurrentPlayer().get_name());
+
+	for (std::shared_ptr<Card> p : gameController.getPlayer2().getGebouwdeKaarten())
+	{
+		controller.printToPlayer(p->getName() + " " + p->getColor() + " " + std::to_string(p->getWaarde()), gameController.getCurrentPlayer().get_name());
+	}
+
+	controller.printToPlayer("=============", gameController.getCurrentPlayer().get_name());
 }
