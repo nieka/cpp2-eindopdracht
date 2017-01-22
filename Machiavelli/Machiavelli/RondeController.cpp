@@ -167,6 +167,12 @@ void RondeController::startRound(Controller & controller, GameController & gameC
 	if (!inRound) {
 		bool playerHasCard = false;		
 		while (!playerHasCard) {
+
+			if (counter >= _oproepVolgorde.size()) {
+				endOfRound(controller, gameController);
+				return;
+			}
+
 			currentKarakter = _oproepVolgorde.at(counter);
 			
 			controller.printLine("De koning roeps de " + currentKarakter + " op!");
@@ -214,10 +220,6 @@ void RondeController::startRound(Controller & controller, GameController & gameC
 			}
 
 			counter++;
-			if (counter >= _oproepVolgorde.size()) {
-				endOfRound(controller, gameController);
-				return;
-			}
 		}	
 
 		if (playerHasCard) {
