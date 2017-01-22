@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <vector>
 class Controller;
 class GameController;
 
@@ -27,4 +28,5 @@ protected:
 	bool _target = false; //dief
 	bool _omgekeerd = false; //is true als de kaart omgekeerd ligt
 	std::string _name;
+	std::vector<std::string> _names;
 };

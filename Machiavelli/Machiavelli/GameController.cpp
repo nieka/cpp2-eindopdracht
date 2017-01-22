@@ -117,7 +117,7 @@ void GameController::toggleCurrentPlayer()
 	}
 }
 
-Deck<std::shared_ptr<IKarakter>> GameController::getKarakterCards() const
+Deck<std::shared_ptr<IKarakter>>& GameController::getKarakterCards()
 {
 	return _karakterDeck;
 }

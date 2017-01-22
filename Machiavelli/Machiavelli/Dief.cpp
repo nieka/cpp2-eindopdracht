@@ -58,15 +58,10 @@ bool Dief::play(int input, Controller & controller, GameController & gcon)
 {
 	if (input > 0 && input < gcon.getKarakterCards().getDeck().size())
 	{
-		Steal(_names.at(input - 1), controller, gcon);
 		controller.printToPlayer("je hebt de " + _names.at(input - 1) + " bestolen", gcon.getCurrentPlayer().get_name());
+		gcon.getKarakterByName(_names.at(input - 1)).setTarget(true);
 		return true;
 	}
 
 	return false;
-}
-
-void Dief::Steal(std::string name, Controller & controller, GameController & gcon)
-{
-	gcon.getKarakterByName(name).setTarget(true);
 }
