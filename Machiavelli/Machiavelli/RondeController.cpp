@@ -193,13 +193,6 @@ void RondeController::startRound(Controller & controller, GameController & gameC
 			if (gameController.getKarakterByName(currentKarakter).getKilled())
 			{
 				controller.printLine("de moordenaar heeft " + currentKarakter + " vermoord.");
-				counter++;
-				startRound(controller, gameController, cardDeck);
-				if (counter >= _oproepVolgorde.size()) {
-					endOfRound(controller, gameController);
-					return;
-				}
-
 			}
 			else if (gameController.getKarakterByName(currentKarakter).getTarget())
 			{
@@ -222,7 +215,7 @@ void RondeController::startRound(Controller & controller, GameController & gameC
 			counter++;
 		}	
 
-		if (playerHasCard) {
+		if (playerHasCard && !gameController.getKarakterByName(currentKarakter).getKilled()) {
 			//the current player has the card so we have a turn
 			inRound = true;
 			controller.printLine(gameController.getCurrentPlayer().get_name() + " heef het karakter kaart " + currentKarakter + " en is nu aan de buurt om iets te doen.");
