@@ -169,6 +169,8 @@ void GameController::resetRound(Controller& controller)
 	_player1.resetRound();
 	_player2.resetRound();
 	_currectPlayer.resetRound();
+
+	_kaartenOpTafel.clear();
 	_karakterVerdelingController.start(controller, *this,_karakterDeck);
 }
 

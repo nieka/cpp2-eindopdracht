@@ -68,6 +68,7 @@ void KarakterVedelingController::HandleGameCommands(const ClientCommand command,
 
 void KarakterVedelingController::start(Controller & controller, GameController & gameController, Deck<std::shared_ptr<IKarakter>>& karakterDeck)
 {
+	step = 1;
 	//zorgt ervoor dat het deck voor de eerste keer wordt aangemaakt.
 	cards = { karakterDeck.getDeck() };
 	deck = true;
